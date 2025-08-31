@@ -1,3 +1,9 @@
+// 5: Create an File IO application for basic operation 
+//    1:Write file:accept data from user and store in file
+//    2:Read file:display line by line
+//    3:copy data from one file into another file
+
+
 #include<iostream>
 #include<string>
 #include<fstream>
