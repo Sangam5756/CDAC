@@ -4,6 +4,7 @@ using namespace std;
 
 void output_array(int arr[], int n)
 {
+    
     cout << "Array is : ";
     for (int i = 0; i < n; i++)
     {
