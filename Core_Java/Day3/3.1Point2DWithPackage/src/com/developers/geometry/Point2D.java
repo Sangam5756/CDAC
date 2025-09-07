@@ -1,0 +1,31 @@
+package com.developers.geometry;
+
+public class Point2D {
+	private int x;
+	private int y;
+	
+	public Point2D(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
+	public	String show(){
+		return "point's x is " + this.x + " & y is " +  this.y + "co-ords";
+	}
+	
+	public boolean isEqual(Point2D point){
+		if(this.x == point.x && this.y == point.y){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+public	double calculateDistance (Point2D p){
+		double c1 = Math.pow((p.x - this.x),2);
+		double c2 = Math.pow((p.y - this.y),2);
+		double c3 = Math.sqrt(c1+c2);
+		return c3;
+	}
+	
+}
