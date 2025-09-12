@@ -12,41 +12,24 @@ public class BankTest {
 
 		try (Scanner sc = new Scanner(System.in)) {
 
-			System.out.println("Enter the Number of Accounts to Create ");
 
-			int size = sc.nextInt();
+			
 
-			BankService bank = new BankServiceImpl(size);
+			BankService bank = new BankServiceImpl(3);
 
-			int ch;
-			do {
-				System.out.println("\n");
-				System.out.println("1. Create Account : ");
+		
+			bank.openSavingAccount(101, 1000, "dummy", "1254456565", 7, "SAVING");
+			bank.openSavingAccount(101, 1000, "dummy", "1254456565", 7, "SAVING");
+		
+		
+				
 
-				System.out.println("\n");
+			
 
-				System.out.print("Enter the Choice : ");
-				ch = sc.nextInt();
+				
+				
 
-				switch (ch) {
-
-				case 1: {
-					try {
-						bank.openSavingAccount(101, 1000, "dummy", "1254456565", 7, "SAVING");
-						
-					}catch(Exception e) {
-						System.out.println(e.getMessage());
-					}
-
-				}
-
-					break;
-
-				default:
-					System.out.println("Invalid Input");
-				}
-
-			} while (ch != 0);
+				
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

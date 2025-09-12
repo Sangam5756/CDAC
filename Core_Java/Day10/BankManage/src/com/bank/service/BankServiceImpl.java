@@ -17,10 +17,8 @@ public class BankServiceImpl implements BankService {
 	}
 
 	@Override
-	public void openCurrentAccount(int accountNumber, double balance, String name, String phoneNumber,
-			double overdraftLimit, AccountType accountType) {
-
-		System.out.println("sdfds");
+	public void openCurrentAccount(int accountNumber, double balance, String name, String phoneNumber, double overdraft,
+			AccountType accountType) {
 
 	}
 
@@ -28,7 +26,7 @@ public class BankServiceImpl implements BankService {
 	public void openSavingAccount(int accountNumber, double balance, String name, String phoneNumber,
 			double interestRate, String accountType) throws BankException {
 
-		BankAccount b = ValidateAccountDetails(accountNumber, balance, name, phoneNumber, interestRate, phoneNumber,
+		BankAccount b = ValidateAccountDetails(accountNumber, balance, name, phoneNumber, accountType, interestRate,
 				accounts);
 		accounts[counter++] = b;
 	}

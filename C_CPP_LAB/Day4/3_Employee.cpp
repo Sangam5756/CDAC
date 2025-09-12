@@ -67,7 +67,7 @@ class Employee {
 };
 
 int main(){
-    Employee emp(1, "Kirtesh", 50000);
+    Employee emp(1, "Sangam", 430000);
     emp.calculate();
     emp.display();
 

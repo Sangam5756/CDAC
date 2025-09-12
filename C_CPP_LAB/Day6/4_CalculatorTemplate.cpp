@@ -1,4 +1,4 @@
-// Class Template – Calculator
+//4 . Class Template – Calculator
 //  Create a class template Calculator<T> with functions:
 // add(), subtract(), multiply(), divide().
 //  Test with int and double.

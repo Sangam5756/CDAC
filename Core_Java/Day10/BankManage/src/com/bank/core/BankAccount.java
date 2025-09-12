@@ -21,7 +21,7 @@ public class BankAccount {
 		this.accountNumber = accountNumber;
 	}
 
-	public double getAccountNumber() {
+	public int getAccountNumber() {
 		return accountNumber;
 	}
 
