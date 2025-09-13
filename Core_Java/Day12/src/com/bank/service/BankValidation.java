@@ -1,4 +1,4 @@
-package com.bank.utils;
+package com.bank.service;
 
 import java.util.ArrayList;
 
@@ -11,10 +11,12 @@ import com.custome_exceptions.BankException;
 public class BankValidation {
 
 	public static BankAccount ValidateAccountDetails(int accountNumber, double balance, String name, String phoneNumber,
-			String accountType, double rateOrDraft, ArrayList<BankAccount> acc) throws BankException {
+			String accountType, double rateOrDraft, ArrayList<BankAccount> acc) throws BankException 
+	
+	{
 
-		AccountType type = AccountType.valueOf(accountType);
-		System.out.println(type);
+		AccountType type = AccountType.valueOf(accountType.toUpperCase());
+
 		validateAccountNumber(accountNumber, acc);
 
 		if (type == AccountType.SAVING) {

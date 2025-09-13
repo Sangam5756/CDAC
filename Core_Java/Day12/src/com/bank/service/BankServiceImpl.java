@@ -15,6 +15,7 @@ import com.custome_exceptions.InsufficientBalance;
 public class BankServiceImpl implements BankService {
 
 	private ArrayList<BankAccount> accounts = new ArrayList<>();
+	
 
 	@Override
 	public String openAccount(int accountNumber, double balance, String name, String phoneNumber, double interestRate,
@@ -101,6 +102,7 @@ public class BankServiceImpl implements BankService {
 
 		BankAccount b = findAccountByAccountNumber(accountNumber);
 //			if the account is Exist then delete it
+		
 		accounts.remove(b);
 
 		return "You Have Closed Your Account";
@@ -139,7 +141,6 @@ public class BankServiceImpl implements BankService {
 		return null;
 	}
 
-	
 	@Override
 	public void SortByAccountNos() {
 		Collections.sort(accounts);
