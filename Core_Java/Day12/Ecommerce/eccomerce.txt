@@ -1,0 +1,80 @@
+Case Study 1: E-Commerce System
+Typical Options (UI Menu)
+
+Add Product
+
+Input: name, category (enum), price, stock.
+
+Validate → No duplicate combination of product name & category
+
+Store product.
+
+Display All Products
+
+Show products with stock status.
+
+Register Customer
+
+Input: name, email, password.
+
+Validate → No duplicate email.
+
+Customer Login
+
+Input: email + password.
+
+Output: successful login or InvalidCredentialsException.
+
+Place Order
+
+Input: customer email, productId, quantity.
+
+Check stock availability.
+
+If ok → reduce stock, create order.
+
+If not → throw OutOfStockException.
+
+View Customer Orders
+
+Display all orders of logged-in customer.
+
+Cancel Order
+
+Restore product stock.
+
+Exit
+
+Data Model
+
+Product → productId, name, category(enum), price, stock.
+id - system generated
+
+
+Customer → id, name, email, password, list of orders.
+
+Order → orderId, customer, list of ordered items.
+
+OrderItem → product, quantity.
+
+Enum
+
+Category { ELECTRONICS, CLOTHING, GROCERY, BOOKS }
+
+Business Rules
+
+Stock must be ≥ ordered qty.
+
+ProductId auto-generated.
+
+Unique customer email.
+
+Exceptions
+
+ECommerceException (base).
+
+DuplicateProductException.
+
+InvalidCredentialsException.
+
+OutOfStockException.
