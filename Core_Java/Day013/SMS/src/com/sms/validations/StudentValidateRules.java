@@ -31,7 +31,7 @@ public class StudentValidateRules {
 		}
 
 //		if right then  admit the student
-		validCourse.setCourseSeats(courseCapacity - 1);
+		validCourse.setCourseSeats(validCourse.getCourseSeats() - 1);
 
 //		return the student
 		return new Student(name, email, marks, validCourse, LocalDate.now());
