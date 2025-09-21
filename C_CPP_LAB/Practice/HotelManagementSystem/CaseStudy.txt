@@ -1,0 +1,26 @@
+### 2. Hotel Management System (C++)
+Create a C++ program to demonstrate inheritance and polymorphism in a Hotel Management System.
+
+*Create a Base Class Room:*
+- Attributes: room_number (int), room_type (string) – e.g., "Standard", "Deluxe", price_per_day (double), no_of_days (int)
+- Method: calculate_bill(): This method should be overridden in the derived classes to calculate the total bill for each room type based on the number of days the customer stays
+
+*Create a Derived Class StandardRoom that Inherits from Room:*
+- Attribute: amenities (string) – Description of amenities included (e.g free wi-fi etc)
+- Methods: special_amenities(): This method should provide additional details about the amenities included in the standard room
+
+*Create Another Derived Class DeluxeRoom that Inherits from Room:*
+- Attribute: special_service (string) – Description of the special services offered in the deluxe room (e.g. breakfast included, Ac room)
+- Methods: special_services(): This method should provide additional details about the special services available in the deluxe room
+
+*Implement a System to Manage Information:*
+- Store details of Room using an appropriate data structure (e.g: array)
+
+*Provide the following options to the user:*
+1) Add StandardRoom Details
+2) Add DeluxeRoom Details
+3) Display details and Invoke the calculate_bill() method for each Room
+4) If the Room is an StandardRoom, invoke special_amenities() method. If the Room is a DeluxeRoom, invoke special_services()
+5) Exit the Program
+
+*Notes:* Demonstrate polymorphism by overriding calculate_bill() method in the derived classes. Also provide specific implementations for special_amenities() and special_service().
