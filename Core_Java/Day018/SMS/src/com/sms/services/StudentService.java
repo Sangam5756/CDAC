@@ -9,7 +9,7 @@ public interface StudentService {
 	public Student findStudentByEmail(String email) throws StudentException;
 	
 	public void serial();
-	public void deserial(String fileNameCustom);
+	public void deserial(String fileNameCustom) throws Exception;
 	void displayAvailableSeats();
 
 	public void displayData() throws StudentException;

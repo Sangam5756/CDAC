@@ -14,7 +14,23 @@ public class Main {
 		System.out.println("Enter the File Name From Data To Import");
 		String fileName =scanner.nextLine();
 
-		service.deserial(fileName);
+			
+		try {
+			service.deserial(fileName);
+			
+			
+		}catch(Exception e) {
+			System.out.println("No file Found");
+			System.out.println("Creating new file");
+			try {
+				service.serial();
+			}catch(Exception E) {
+				System.out.println("Error creating file");
+			}
+		}
+		
+		
+		
 		while (!exit) {
 			System.out.println("\n=== Student Admission System ===");
 			System.out.println("1. Admit Student");
@@ -46,6 +62,7 @@ public class Main {
 
 					service.admitStudent(name, email, marks, course);
 					System.out.println(" Student admitted successfully!");
+					service.serial();
 					break;
 
 				case 2:
@@ -53,6 +70,7 @@ public class Main {
 					String cancelEmail = scanner.nextLine();
 					service.cancelAdmission(cancelEmail);
 					System.out.println(" Admission cancelled.");
+					service.serial();
 					break;
 
 				case 3:
@@ -87,6 +105,7 @@ public class Main {
 					System.out.println("Sorted Students by Email ");
 
 					service.displayStudentListSortByName();
+					service.serial();
 					break;
 
 				case 9:

@@ -1,11 +1,11 @@
 package com.sms.ServiceImpl;
 
+import static com.sms.validations.StudentValidateRules.ValidateStudentInputs;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.Provider.Service;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +15,6 @@ import com.sms.core.Course;
 import com.sms.core.Student;
 import com.sms.exception.StudentException;
 import com.sms.services.StudentService;
-import static com.sms.validations.StudentValidateRules.*;
 
 public class StudentServiceImpl implements StudentService {
 
@@ -49,9 +48,9 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
-	public void deserial(String fileNameCustom) {
+	public void deserial(String fileNameCustom) throws  Exception {
 
-		try {
+		
 
 			String fileName;
 			if (fileNameCustom.length() == 0) {
@@ -70,11 +69,9 @@ public class StudentServiceImpl implements StudentService {
 
 			in.close();
 
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		} 
 
-	}
+
 
 	public static Student findByEmail(String email, ArrayList<Student> students) throws StudentException {
 //		first create object  of student initialize with email

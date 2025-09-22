@@ -11,7 +11,7 @@ public class StudentAdmissionData {
 //			service.admitStudent("D", "d@gmail.com", 90, "mern");
 			service.displayData();
 			service.serial();
-			service.deserial();
+//			service.deserial();
 			
 			
 					
