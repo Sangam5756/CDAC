@@ -111,8 +111,9 @@ int main()
 
             break;
         }
-        case 0:{
-            cout<<"program exited successfully"<<endl;
+        case 0:
+        {
+            cout << "program exited successfully" << endl;
             break;
         }
         default:
@@ -121,9 +122,10 @@ int main()
 
     } while (ch != 0);
 
-    for (int i = 0; i < index; i++) {
-    delete rooms[i];
-}
+    for (int i = 0; i < index; i++)
+    {
+        delete rooms[i];
+    }
 
     return 0;
 }

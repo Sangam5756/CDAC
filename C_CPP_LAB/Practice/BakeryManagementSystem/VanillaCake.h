@@ -13,7 +13,7 @@ class VanillaCake : public Cake{
         double calculate_vanillaprice(){
             return getPrice()-(getPrice()*0.10); 
         }
-        void display(){
+        void display() override{
                 Cake::display();
                 cout<<"Discount is "<<discount;
 

@@ -24,7 +24,7 @@ class ChocolateCake : public Cake{
 
         }
 
-        void display(){
+        void display() override{
             Cake::display();
             cout<<"Chocolate Type : "<<chocolateType<<endl;
         }
