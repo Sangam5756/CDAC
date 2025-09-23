@@ -1,0 +1,26 @@
+### 2. Bakery Management System (C++)
+Create a C++ program to demonstrate inheritance and polymorphism in a baker's shop.
+
+*Create a Base Class Cake:*
+- Attributes: Cakename (string), Price(double)
+- Method: display(): This method should display the Cake details. It can be overridden in the derived classes
+
+*Create a Derived Class ChocolateCake that Inherits from Cake:*
+- Attribute: Chocolatetype(string) Fudge Cake, Black Forest
+- Methods: calculate_chocolateprice() (Use Price+5% extra charge for Fudge cake and price+10% extra charge on black forest)
+
+*Create Another Derived Class VanillaCake that Inherits from Cake:*
+- Attribute: discount (int)
+- Methods: calculate_vanillaprice(use discount amount as 10% on vanilla cake)
+
+*Implement a System to Manage Cake Information:*
+Store details of Cake (both ChocolateCake and VanillaCake) using an appropriate data structure an array.
+
+*Provide the following options to the user:*
+1) Add ChocolateCake: Input and invoke calculate_chocolateprice and store calculated price
+2) Add VanillaCake Details: Input and invoke calculate_vanillaprice and store calculated price
+3) Invoke the display () method show details of cakes
+4) If the Cake is ChocolateCake, invoke calculate_chocolateprice() to display their price, If the Cake is VanillaCake, invoke calculate_vanillaprice () to display their price
+5) Exit the Program
+
+*Notes:* Demonstrate polymorphism by overriding the display () method in the derived classes. Also provide specific implementations for calculate_chocolateprice() and calculate_vanillaprice().
