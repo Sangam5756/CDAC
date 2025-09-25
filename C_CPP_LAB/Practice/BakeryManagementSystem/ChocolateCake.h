@@ -4,20 +4,24 @@
 #include <iostream>
 using namespace std;
 
+enum chocolateType{
+    FUDGE,BLACK_FOREST
+};
+
 class ChocolateCake : public Cake{
-    string chocolateType;
+    chocolateType chocolate;
     public:
-        ChocolateCake(string cakeName,double price,string chocolateType):Cake(cakeName,price){
-            this->chocolateType=chocolateType;
+        ChocolateCake(string cakeName,double price,chocolateType chocolate):Cake(cakeName,price){
+            this->chocolate=chocolate;
         }
         double calculateChocolatePrice(){
             double basePrice =getPrice();
             // if fudge then 5% extra
             // if black forest 10 % extra
-            if(chocolateType == "Fudge"){
+            if(chocolate == FUDGE){
                 basePrice =(getPrice() +(getPrice()*0.05));
             }
-             if(chocolateType == "BlackForest"){
+             if(chocolate == BLACK_FOREST){
                 basePrice  =(getPrice() +(getPrice()*0.10));
             }
             return basePrice;
@@ -26,7 +30,7 @@ class ChocolateCake : public Cake{
 
         void display() override{
             Cake::display();
-            cout<<"Chocolate Type : "<<chocolateType<<endl;
+            cout<<"Chocolate Type : "<<chocolate<<endl;
         }
 
 };

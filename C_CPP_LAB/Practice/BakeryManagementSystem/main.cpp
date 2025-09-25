@@ -5,6 +5,17 @@
 #include <vector>
 using namespace std;
 
+
+ chocolateType validType(string str){
+        if(str == "Fudge" || str == "fudge"){
+            return FUDGE;
+        }
+            if(str == "blackforest" || str == "BlackForest"){
+            return BLACK_FOREST;
+        }
+ } 
+
+
 int main()
 {
 
@@ -42,6 +53,7 @@ int main()
         {
 
             string name, type;
+            
             double price;
             cout << "Enter Cake Name: ";
             cin >> name;
@@ -49,8 +61,8 @@ int main()
             cin >> price;
             cout << "Enter Chocolate Type (Fudge/BlackForest): ";
             cin >> type;
-
-            cakes.push_back(new ChocolateCake(name,price,type));
+            chocolateType cakeType = validType(type);
+            cakes.push_back(new ChocolateCake(name,price,cakeType));
             break;
         }
 
