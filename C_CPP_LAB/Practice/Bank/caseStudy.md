@@ -1,6 +1,3 @@
-Perfect! You want **small, 1-hour C++ lab-style practice questions** that touch most of your syllabus: OOP, inheritance, polymorphism, enums, exception handling, STL, pointers, templates, file I/O, and user input. Here’s a curated list of such exercises with **clear problem statements**, each doable in roughly an hour:
-
----
 
 ## **1. Student Marks System**
 
@@ -73,17 +70,3 @@ Perfect! You want **small, 1-hour C++ lab-style practice questions** that touch 
 * Method: `askQuestion()` displays question and checks answer
 
 ---
-
-### **Tip for One-Hour Implementation**
-
-* Focus on **2-3 classes max** per project.
-* Use **vector** instead of raw arrays for faster implementation.
-* Keep exception handling simple: just 1-2 custom exceptions.
-* Use **enums** only for obvious categories (subject, room type, difficulty).
-* Menu-driven interface makes the program interactive but small.
-
----
-
-If you want, I can **pick one of these and write a fully working 1-hour skeleton code** with comments, showing how each syllabus point fits in — so you can immediately implement and test.
-
-Which one should I do first?
