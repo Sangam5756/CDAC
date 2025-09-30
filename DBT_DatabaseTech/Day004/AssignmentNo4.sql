@@ -61,37 +61,43 @@ INSERT INTO loan_application (lno, lamtrequired, lamtapproved, l_date, cno, bid)
 
 -- Solve the Queries
 -- 1. Find the names of the customers for the “Aundh” branch.
-SELECT DISTINCT c.cname
-FROM Customer c
-JOIN Loan_Application l ON c.cno = l.cno
-JOIN Branch b ON l.bid = b.bid
-WHERE b.brname = 'Aundh';
+
+select c.cname from Customer c
+JOIN loan_application ln on c.cno = ln.cno join Branch bd
+on ln.bid = bd.bid
+where bd.brname = 'Aundh';
+
 
 -- 2. List the names of the customers who have received loan less than their requirement.
-SELECT c.cname
-FROM Customer c
-JOIN Loan_Application l ON c.cno = l.cno
-WHERE l.lamtapproved < l.lamtrequired;
+select c.cname from Customer c
+Join loan_application ln on c.cno = ln.cno 
+where ln.lamtapproved < ln.lamtrequired;
+
 -- 3. Find the maximum loan amount approved.
-SELECT MAX(lamtapproved) AS MaxApproved
-FROM Loan_Application;
+select max(lamtapproved) loanapproved from LOAN_APPLICATION;
+
 
 -- 4. Find out the total loan amount sanctioned by “Deccan “branch.
-SELECT SUM(l.lamtapproved) AS TotalSanctioned
-FROM Loan_Application l
-JOIN Branch b ON l.bid = b.bid
-WHERE b.brname = 'Deccan';
+select sum(lamtapproved) 
+from loan_application ln 
+join
+Branch bd on ln.bid=bd.bid where bd.brname = 'Deccan';
+
 
 -- 5. Count the number of loan applications received by “M.G.ROAD” branch.
-SELECT COUNT(*) AS LoanCount
-FROM Loan_Application l
-JOIN Branch b ON l.bid = b.bid
-WHERE b.brname = 'M.G.ROAD';
+
+select count(*) as applicationreceived from loan_application ln
+join branch b on ln.bid = b.bid where b.brname='M.G.ROAD';
+
+
+
 
 -- 6. List the names of the customer along with the branch names who have applied for
 -- loan in the month of September.
-SELECT c.cname, b.brname
-FROM Loan_Application l
-JOIN Customer c ON l.cno = c.cno
-JOIN Branch b ON l.bid = b.bid
-WHERE MONTH(l.l_date) = 9;
+
+select c.cname , br.brname from Customer c 
+join loan_application ln on c.cno =ln.cno
+JOIN Branch br 
+on ln.bid = br.bid
+where date_format(ln.l_date,'%M') = 'September';
+
