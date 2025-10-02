@@ -37,7 +37,7 @@ Let's say:
 - product1 hashes to bucket 1
 - product2 hashes to bucket 5
 - product4 hashes to bucket 9
-- product5 hashes to bucket 1 (same as product1, but different by equals)
+- product5 hashes  to bucket 1 (same as product1, but different by equals)
 
 Then:
 

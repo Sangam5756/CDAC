@@ -19,8 +19,6 @@ CREATE TABLE server (
     constraint fk_adminid foreign key(adminid) references admin(adminid)
 );
 
-
-
 -- Admin(adminid,username,password,mobile,name)
 CREATE TABLE admin (
     adminid int primary key not null,
@@ -32,7 +30,7 @@ CREATE TABLE admin (
 
 -- 1. display all server-name, location of the server
 SELECT s.sname, l.lname from server s, location l
-WHERE l.loc_id = s.sid;
+WHERE l.loc_id = s.lid;
 -- 2. display all server-name, admin-name, admin mobile
 SELECT s.sname, a.name, a.mobile
 from server s 
@@ -41,6 +39,8 @@ inner join admin a on a.adminid = s.adminid;
 -- 3. display all server which are managed by admin rohit
 SELECT * from server
 where adminid in (SELECT adminid from admin where name = 'Rohit');
+
+select * from server s inner join admin a on s.adminid = a.adminid where a.name = 'Rohit';
 
 -- 4. display all server and the locations,for which admin is rohit
 SELECT s.sname, l.lname from server s
@@ -68,9 +68,11 @@ on a.adminid = s.adminid
 where s.adminid is null;
 
 
+
 -- 7. display  servers, admins and location of the server
-
-
+select * from server s join
+ admin a on s.adminid = a.adminid
+  join location ln on s.lid = l.loc_id;
 
 
 -- 8. to display all admins for whom no server is assigned also display locations at which no server is placed
@@ -81,4 +83,14 @@ where s.adminid is null;
 
 -- 9. display all servers for which no location is assigned
 
+select * from server s 
+left join location
+ln
+on s.lid = ln.loc_id
+where ln.loc_id is null;
+
 -- 10. display all servers, for which no location is assigned, whose admin is namrata
+select * from server s   join admin a
+on s.adminid = a.adminid LEFT JOIN location l ON s.lid = l.loc_id
+WHERE l.loc_id IS NULL
+  AND a.name = 'Namrata';

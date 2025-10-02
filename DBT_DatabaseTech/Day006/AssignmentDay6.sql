@@ -53,11 +53,6 @@ INSERT INTO Server (sid,sname, configuration, lid, adminid) VALUES
     
 
 
-
-
-
-
-
 -- 2. display all server-name, admin-name, admin mobile
 
 select s.sname, a.name , a.mobile from server s ,location l, admin a;
@@ -115,6 +110,15 @@ WHERE s.sid IS NULL;
 
 -- 9. display all servers for which no location is assigned
 
+select * from server s left join location ln on s.lid = ln.loc_id 
+where ln.loc_id is null; 
+
+
+
 -- 10. display all servers, for which no location is assigned,
 -- whose admin is namrata
+
+select * from server s left join
+location ln on s.lid =ln.loc_id where ln.loc_id is null and s.adminId = (select a.adminid from admin a where a.name='Namrata');
+
 

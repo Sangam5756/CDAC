@@ -1,5 +1,3 @@
 package com.shoe.core;
 
-public enum ShoeType {
-		FORMAL,CASUAL,SPORTS
-}
+public enum ShoeType {FORMAL,CASUAL,SPORTS}

@@ -24,7 +24,6 @@ public class ShoeserviceImpl implements ShoeService {
 		shoes.put(207, new Shoe(207, 5, "Trailblazer", "North Peak", 200, true, ShoeType.SPORTS));
 		shoes.put(200, new Shoe(205, 5, "Trailblazer", "North Peak", 30000, true, ShoeType.SPORTS));
 		shoes.put(100, new Shoe(205, 5, "Trailblazer", "North Peak", 5300, false, ShoeType.SPORTS));
-
 	}
 
 	@Override
