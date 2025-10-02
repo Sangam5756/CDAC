@@ -188,20 +188,37 @@ create table mydept_DBDA(
 --  lname varchar2(15) not null, sal number(9,2) check(sal >=1000), doj date default sysdate,
 --  passportnum varchar2(15) unique,
 --  deptno number constraint fk_deptno references mydept_DBDA(deptid) on delete cascade )
+create Table myemployee (
+    empno INT(5) PRIMARY key,
+    fname varchar(15) not null,
+    mname VARCHAR(15),
+    lname VARCHAR(15) not null,
+    sal DOUBLE(9,2) check(sal >=1000),
+    doj date DEFAULT (curdate()),
+    passportnum varchar(15) UNIQUE,
+    deptno int ,
+    constraint fk_deptno Foreign Key(deptno) REFERENCES DEPT(DEPTNO)
+    on Delete CASCADE
 
+);
 
 
 
 -- 32. Create following tables Student, Course
+
 -- Student (sid,sname) ---------------- sid ---primary key
+create table Student (
+    sid int PRIMARY KEY,
+    sname VARCHAR(15)
+);
+
 -- Course(cid,cname)-------------- cid ---primary key
+CREATE TABLE Course(
+    cid int PRIMARY key,
+    cname VARCHAR(15)
+);
 -- Marks(studid,coursed,marks)
--- Sample data for marks table
--- studid,courseid,marks
--- 1 1 99
--- 1 3 98
--- 2 1 95
--- 2 2 97
+
 -- create table marks(
 -- studid number,
 -- courseid number,
@@ -210,6 +227,29 @@ create table mydept_DBDA(
 -- constraint fk_sid foreign key (studid) references student(sid) on delete set null,
 -- constraint fk_cid foreign key (courseid) references course(cid)
 -- )
+CREATE Table Marks(
+    studid int,
+    courseid int,
+    marks int,
+    constraint pk PRIMARY KEY(studid,courseid),
+
+    constraint fk_studid FOREIGN KEY(studid) REFERENCES Student(sid)
+        on delete CASCADE
+    ,
+    constraint fk_courseId FOREIGN KEY(courseid) REFERENCES Course(cid)
+);
+
+
+-- Sample data for marks table
+-- studid,courseid,marks
+-- 1 1 99
+-- 1 3 98
+-- 2 1 95
+-- 2 2 97
+
+
+
+
 -- 33. Create empty table emp10 with table structure same as emp table.
 -- create table emp10 as
 -- (
@@ -217,6 +257,7 @@ create table mydept_DBDA(
 -- from emp
 -- where 1=2;
 -- )
+
 
 -- 34. Solve following using alter table
 -- add primary key constraint on emp,dept,salgrade
@@ -226,49 +267,121 @@ create table mydept_DBDA(
 -- add foreign key constarint in emp
 -- deptno --->> dept(deptno)
 -- add new column in emp table netsal with constraint default 1000
+
+
+
 -- 35. Update employee sal ---- increase sal of each employee by 15 % sal +comm, change the job
+
 -- to manager and mgr to 7777 for all employees in deptno 10.
+UPDATE EMP
+SET 
+    sal = (sal + IFNULL(comm,0)) * 1.15,
+    job = 'MANAGER',
+    mgr = 7777
+WHERE deptno = 10;
+
+
+
+
 -- 36. change job of smith to senior clerk
+
+update EMP SET
+job = 'senior clerk'
+where ename = 'SMITH';
+
+
 -- 37. increase salary of all employees by 15% if they are earning some commission
+
+UPDATE EMP SET
+sal = sal * 1.15
+where comm is not null and comm > 0;
+
 -- 38. list all employees with sal>smith's sal
+SELECT * FROM EMP where sal > (select sal from EMP where ename ='smith');
+
+
 -- 39. list all employees who are working in smith's department
+
+SELECT * from EMP where deptno = (select deptno from EMP where ename ='SMITH');
+
 -- 40. list all employees with sal < rajan's sal and salary > revati's sal
+SELECT * from EMP WHERE sal BETWEEN (select sal from EMP where ename = 'rajan') and (select sal from EMP where ename= 'revati');
+
 -- 41. delete all employees working in alan's department
+
+DELETE from EMP
+where deptno in 
+(select deptno from (select deptno from EMP where  ename = 'alan') as temp);
+
+
+
 -- 42. change salary of Alan to the salary of Miller.
+UPDATE EMP
+set
+sal =( select sal from (select sal from EMP where ename = 'miller') as temp)
+WHERE ename = 'Allen';
+
+
+
 -- 43. change salary of all emplees who working in Wall's department to the salary of Miller.
+
+
+
 -- 44. list all employees with salary > either Smith's salary or alan's sal
+
 -- 45. list all employees who earn more than average sal of dept 10
+
 -- 46. list all employees who earn more than average sal of Alan's department
+
 -- 47. list all employees who are working in purchase department
+
 -- 48. list all employees who earn more than average salary of their own department
+
 -- 49. list all employees who earn sal < than their managers salary
+
 -- 50. list all employees who are earning more than average salary of their job
+
 -- 51. display employee name and department
+
 -- 52. display empno,name,department name and grade (use emp,dept and salgrade table)
+
 -- 53. list all employees number,name, mgrno and manager name
+
 -- 54. create following tables and solve following questions(primary keys are marked in yellow)
 
 
+
 -- foreign keys are marked in green
+
 -- product(pid,pname,price,qty,cid,sid)
+
 -- salesman (sid,sname,address)
+
 -- category(cid,cnam,descritpion)
+
 -- 1. list all product name,their category name and name of a person, who sold that product
+
 -- 2. list all product name and salesman name for all salesman who stays in pune
+
 -- 3. list all product name and category name
+
 -- 55. create following tables and solve following questions(primary keys are marked in yellow)
 -- foreign keys are marked in green
 -- faculty(fid,fname,sp.skill1,sp.skill2)
 -- courses(cid,cname,rid,fid)
 -- room(roomid,rname,rloc)
 
+
 -- 1. list all courses for which no room is assigned. And all rooms for which are
 -- available
+
 
 -- 2. list all faculties who are not allocated to any course and rooms which are not
 -- allocated to any course
 
+
 -- 3. list all rooms which are allocated or not allocated to any courses
+
 
 -- 4. list all rooms which are not allocated to any courses
 
@@ -279,6 +392,8 @@ create table mydept_DBDA(
 -- details
 
 -- 56. create following tables with given constraints
+
+
 -- product---- qty >0, default 20.00,pname not null and unique
 -- prodid pname qty price catid sid
 -- saleman ----- sname -----not null
@@ -293,11 +408,19 @@ create table mydept_DBDA(
 -- 2 chocolate very chocolaty
 -- 3 snacks yummy
 -- 4 cold drinks thanda thanda cool cool
+
 -- 1. List all products with category chips
+
 -- 2. display all products sold by kirti
+
 -- 3. display all salesman who do not sold any product
+
 -- 4. display all category for which no product is there
+
 -- 5. display all products with no category assigned
+
 -- 6. list all salesman who stays in city with name starts with P or N
+
 -- 7. add new column in salesman table by name credit limit
+
 -- ------------------------------
