@@ -103,5 +103,6 @@ HAVING number_of_employees > 10;
 
 -- 20. Write a query to get the department ID, year, and number of employees joined.   
 
+
   
  

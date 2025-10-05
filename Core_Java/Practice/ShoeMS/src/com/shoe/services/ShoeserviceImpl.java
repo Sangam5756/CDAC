@@ -42,29 +42,27 @@ public class ShoeserviceImpl implements ShoeService {
 		shoes.put(shoeId, new Shoe(shoeId, ratings, name, brand, price, available, shoetype));
 
 	}
+	
 
 	@Override
 	public void displayAllShoes() {
-
 //		in order to display all the shoes we need that for Each loop
 		shoes.forEach((k, v) -> System.out.println(k + " " + v));
-
 	}
 
 	@Override
 	public void displayAllShoeSortByid() {
-		// TODO Auto-generated method stub
+		
 //			convert map to list
 		List<Shoe> list = new ArrayList<>(shoes.values());
-//		call collections sort function, impleetm comparable and override the comparato as per our requirement
-
+//		call collections sort function, implements comparable and override the comparator as per our requirement
 		Collections.sort(list);
 		list.forEach((shoe) -> System.out.println(shoe));
 	}
 
 	@Override
 	public void searchShoeById(int id) throws ShoeException {
-		// TODO Auto-generated method stub
+
 //		searching in hashmap is constant time as it
 //		provide the get api
 		Shoe shoe = shoes.get(id);

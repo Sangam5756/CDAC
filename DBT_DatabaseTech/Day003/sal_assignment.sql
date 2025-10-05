@@ -49,11 +49,13 @@ select * from emp where ename like '%S';
  
 -- 8. list all employees with name contains I at 2nd position
 select * from emp where ename like '_I%';
+
 -- 9. list all employees with name starts with A ends witn N and somewhere in between L is there
 select * from emp  where ename like 'A%L%N';
 
 -- 10. list all employees with name starts with A and B at 3 rd position and P at second last position
 select * from emp where ename like 'A_B%P_';
+
 -- 11. List all employees with name starts with either A or starts with S or starts with W
 select * from emp where ename like 'A%' or ename like  'S%' or ename like  'W%';
 select * from emp where ename REGEXP '^[AS]';
@@ -103,7 +105,7 @@ select deptno, sum(sal) from emp group by deptno HAVING SUM(sal) >3000;
 
 -- 22. display min sal,max sal, average sal for all employees working under same manager
 
-    select MIN(sal), MAX(sal) , AVG(sal) from emp where mgr 
+    select MIN(sal), MAX(sal) , AVG(sal) from emp group by mgr;
 
 
 -- 23. find sum of total earnings(sal+comm), average of sal+comm for all employees who earn sal >-- 2000 and work in either dept no 10 or 20
@@ -134,6 +136,9 @@ select date_format(curdate(),'%b');
     select CONCAT(SUBSTR(ename,3,5),' ', right(job,2)) as EMPCODE ,ename ,job from emp;
 
 -- 28. display thousand separator and $ symbol for commission if it is null then display it as 0 for all employees whose name starts with A and ends with N
+
+    SELECT CONCAT('$', FORMAT(IFNULL(comm,0), 0)) as commision from EMP where ename like 'A%N';
+
 
 
 
@@ -341,32 +346,74 @@ select * from EMP where sal > (SELECT AVG(sal) from EMP where deptno=10);
 SELECT * from EMP WHERE sal > (select AVG(sal) from EMP where deptno = (SELECT deptno FROM EMP where ename = "ALLEN"));
 
 -- 47. list all employees who are working in purchase department
+-- select * from EMP where deptno = (select deptno from DEPT where dname='PURCHASE');
+select * from EMP where deptno = (select deptno from DEPT where dname='ACCOUNTING');
 
 -- 48. list all employees who earn more than average salary of their own department
+    SELECT * from EMP e WHERE e.sal > (select AVG(sal) from EMP e1 where e.deptno =e1.deptno);
+
 
 -- 49. list all employees who earn sal < than their managers salary
 
+    select * from EMP e where sal < (select sal from EMP e1 where e.mgr=e1.empno );
+
+
 -- 50. list all employees who are earning more than average salary of their job
+    select * from EMP e where sal > (select AVG(sal) from emp e1 where e.job =e1.job);
+
 
 -- 51. display employee name and department
 
--- 52. display empno,name,department name and grade (use emp,dept and salgrade table)
+    select e.ename , d.dname from EMP e,DEPT d where e.deptno=d.deptno;
 
+-- 52. display empno,name,department name and grade (use emp,dept and salgrade table)
+    select e.empno , e.ename ,d.dname ,s.grade
+    from EMP e inner join 
+    DEPT d on e.deptno = d.deptno
+    inner join salgrade s on e.sal between s.losal and s.hisal;
+    
 -- 53. list all employees number,name, mgrno and manager name
+select e.empno,e.ename , e.mgr, m.ename from EMP e inner join emp m
+on e.mgr = m.empno;
+
 
 -- 54. create following tables and solve following questions(primary keys are marked in yellow)
-
 
 
 -- foreign keys are marked in green
 
 -- product(pid,pname,price,qty,cid,sid)
 
+    create table product (
+        pid int primary key,
+        pname varchar(29),
+        price double(9,2),
+        qty int,
+        cid int,
+        sid int
+);
+
+
 -- salesman (sid,sname,address)
 
+    create table salesman (
+        sid int PRIMARY KEY,
+        sname varchar(20),
+        address varchar (30)
+    );
+
+
 -- category(cid,cnam,descritpion)
+create table category(
+    cid int PRIMARY KEY,
+    cname VARCHAR(20),
+    address VARCHAR(20)
+);
+
 
 -- 1. list all product name,their category name and name of a person, who sold that product
+
+
 
 -- 2. list all product name and salesman name for all salesman who stays in pune
 
@@ -394,6 +441,7 @@ SELECT * from EMP WHERE sal > (select AVG(sal) from EMP where deptno = (SELECT d
 
 -- 5. display courses and faculty assigned to those courses whose special skill is
 -- database
+
 
 -- 6. display time table --- it should contain course details , faculty and room
 -- details
