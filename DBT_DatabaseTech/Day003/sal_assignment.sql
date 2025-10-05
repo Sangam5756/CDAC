@@ -324,14 +324,21 @@ WHERE ename = 'Allen';
 
 
 -- 43. change salary of all emplees who working in Wall's department to the salary of Miller.
-
-
-
+UPDATE
+EMP
+SET
+sal = (select sal from (select sal from EMP where ename = 'miller') as temp)
+where deptno in (select deptno from (select deptno from EMP where ename = 'wall') as temp2);
 -- 44. list all employees with salary > either Smith's salary or alan's sal
 
+UPDATE EMP
+SET sal = ()
+
 -- 45. list all employees who earn more than average sal of dept 10
+select * from EMP where sal > (SELECT AVG(sal) from EMP where deptno=10);
 
 -- 46. list all employees who earn more than average sal of Alan's department
+SELECT * from EMP WHERE sal > (select AVG(sal) from EMP where deptno = (SELECT deptno FROM EMP where ename = "ALLEN"));
 
 -- 47. list all employees who are working in purchase department
 
