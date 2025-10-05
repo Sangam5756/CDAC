@@ -2,7 +2,7 @@
 # 🛒 HashMap Practice — Product Management Demo
 
 This project demonstrates **HashMap operations in Java** using a `Product` entity.
-You’ll learn how to perform **CRUD**, **sorting**, **filtering**, **stream processing**, and **optional handling** cleanly.
+
 
 ---
 
