@@ -1,0 +1,25 @@
+Q.1) Write a Java application for Mobile Phone Inventory Management System.
+
+Mobile Phone Details:
+
+Phone_Id (int) (unique, should be generated automatically), ModelName (String), Brand (String), Price (double),
+Ratings (int) (scale between 1 to 5) (changed scale for variation), InStock (boolean: True/False)
+PhoneType (enum) [SMARTPHONE, FEATURE_PHONE, FOLDABLE] (changed types)
+
+Requirements:
+All CRUD operations MUST happen in constant time performance. (Use any suitable collection like HashMap or ConcurrentHashMap)
+
+Implement required parsing/validation methods and custom exceptions:
+1.1) Throws an exception if ratings are not between 1 and 5.
+1.2) Validates that the ModelName has a length between 2 and 15 characters. (slightly different range)
+1.3) Validates that the PhoneType is one of the predefined types.
+
+Implement below functionalities:
+2.1) Add a new Mobile record to the collection. (Add at least 5 new records in Collection) (added one more record requirement)
+2.2) Display all Mobile details.
+2.3) Display all Mobile details sorted by Phone_Id.
+2.4) Search the Mobile which is least expensive in the inventory. (changed from most expensive)
+2.5) Remove Mobiles that are not in stock.
+2.6) Update Mobile price based on ModelName. (changed brand → model for variation)
+2.7) Sort Mobile data as per price in ascending order. (changed from descending)
+2.8) Exit from application.
