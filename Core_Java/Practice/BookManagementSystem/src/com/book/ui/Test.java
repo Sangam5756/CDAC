@@ -11,7 +11,7 @@ public class Test {
 		try {
 			
 			// Adding EBooks
-			bookService.addEBook("Java Basics", "John Doe", 4, 300, true, "SCIENCE", 15, "PDF");
+			bookService.addEBook("Java Basics", "John Doe", 15, 300, true, "SCIENCE", 15, "PDF");
 			bookService.addEBook("Advanced Java", "Jane Smith", 5, 450, true, "NONFICTION", 20, "TEXT");
 			bookService.addEBook("Learning Spring", "Mike Ross", 3, 250, false, "SCIENCE", 10, "doc");
 

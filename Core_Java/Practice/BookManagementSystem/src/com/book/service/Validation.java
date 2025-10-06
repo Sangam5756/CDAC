@@ -10,9 +10,9 @@ import com.book.exception.BooksException;
 public class Validation {
 
 	public static void validateRating(int rating) throws BooksException {
-		if (rating < 0 && rating > 5)
-			throw new BooksException("invalid rating exception");
-	}
+		if (rating < 0 || rating > 5)
+		    throw new BooksException("invalid rating exception");
+
 	public static void validateTitle(String title) throws BooksException {
 		if (title.length() < 3 && title.length() > 50)
 			throw new BooksException("title length must be 1 to 50");
