@@ -257,11 +257,13 @@ CREATE Table Marks(
 
 -- 33. Create empty table emp10 with table structure same as emp table.
 -- create table emp10 as
--- (
--- select *
--- from emp
--- where 1=2;
--- )
+(
+select *
+from emp
+where 1=2;
+)
+
+
 
 
 -- 34. Solve following using alter table
@@ -272,6 +274,9 @@ CREATE Table Marks(
 -- add foreign key constarint in emp
 -- deptno --->> dept(deptno)
 -- add new column in emp table netsal with constraint default 1000
+
+
+
 
 
 
@@ -391,6 +396,9 @@ on e.mgr = m.empno;
         qty int,
         cid int,
         sid int
+
+        constaint fk_sid FOREIGN KEY(sid) references salesman(sid),
+        constaint fk_cid FOREIGN KEY(cid) references category(cid)
 );
 
 
@@ -413,69 +421,175 @@ create table category(
 
 -- 1. list all product name,their category name and name of a person, who sold that product
 
+select pd.pname,ct.cname,s.sname from product pd  join Category ct on pd.cid = ct.cid join salesman s on pd.sid=s.sid;
+
+
 
 
 -- 2. list all product name and salesman name for all salesman who stays in pune
 
+    select p.pname,s.sname from product p , salesman s where  p.sid=s.sid and s.address='pune';
+
+
 -- 3. list all product name and category name
+
+    select pd.pname ,c.cname from product pd  inner join category c on pd.cid=c.cid;
+
 
 -- 55. create following tables and solve following questions(primary keys are marked in yellow)
 -- foreign keys are marked in green
+
+
 -- faculty(fid,fname,sp.skill1,sp.skill2)
+
+    create table faculty(
+        fid int PRIMARY KEY,
+        sname varchar(20),
+        spskill1 varchar(20),
+        spskill2 varchar(20),
+    )
+
+
 -- courses(cid,cname,rid,fid)
+
+create table courses(
+    cid int PRIMARY KEY,
+    cname varchar(20),
+    fid int,
+    rid int,
+    constraint fk_fid FOREIGN KEY(fid) REFERENCES faculty(fid),
+    constraint fk_rid FOREIGN KEY(rid) REFERENCES room(rid)
+);
+
+
 -- room(roomid,rname,rloc)
+create table room(
+    roomid int PRIMARY KEY,
+    rname VARCHAR(30),
+    rloc VARCHAR(30)
+);
+
+
+
+
 
 
 -- 1. list all courses for which no room is assigned. And all rooms for which are
 -- available
 
+    (select * from courses c right join room r on  c.rid=r.rid where c.cid is null)
+                    UNION
+
+    (SELECT * FROM room r    LEFT JOIN courses c ON r.rid = c.rid where c.cid is not null);
+
+
+
 
 -- 2. list all faculties who are not allocated to any course and rooms which are not
 -- allocated to any course
 
+        (select 'Faculty' AS type, f.fid AS id, f.fname AS name from faculty f left join courses c on f.fid =c.fid where c.cid is null)
+        UNION
+
+        (select 'Room' AS type, r.rid AS id, r.rname AS name from room r left join courses c on r.rid =c.rid where c.cid is null);
+
+
 
 -- 3. list all rooms which are allocated or not allocated to any courses
 
+    select * from room r left join courses c on r.rid=c.cid;
 
--- 4. list all rooms which are not allocated to any courses
+    
+    -- 4. list all rooms which are not allocated to any courses
+
+    select * from room r left join courses c on r.rid=c.rid  where c.cid is null;
+
 
 -- 5. display courses and faculty assigned to those courses whose special skill is
 -- database
 
+select * from courses c inner join faculty f on c.fid=f.fid where spskill1 = 'database' or spskill2='database';
+
 
 -- 6. display time table --- it should contain course details , faculty and room
 -- details
+    select * from courses s inner join faculty f on s.fid =s.fid inner join room r on s.rid =r.rid;
+
+
+
 
 -- 56. create following tables with given constraints
 
 
 -- product---- qty >0, default 20.00,pname not null and unique
 -- prodid pname qty price catid sid
+create table product (
+    prodid int PRIMARY KEY,
+    pname VARCHAR(30) NOT NULL UNIQUE,
+    qty int,
+    price DOUBLE(9,2),
+    catid int ,
+    sid int ,
+
+    constraint fk_catid FOREIGN KEY(catid) REFERENCES category(catid),
+    constraint fk_sid FOREIGN KEY (sid) REFERENCES salesman(sid)
+
+);
+
 -- saleman ----- sname -----not null
 -- sid sname city
+CREATE table salesman(
+    sid int PRIMARY KEY,
+    sname VARCHAR(30),
+    city VARCHAR (30)
+);
+
 -- 11 Rahul Pune
 -- 12 Kirti Mumbai
 -- 13 Prasad Nashik
 -- 14 Arnav Amaravati
+
+
 -- category ---- cname unique and not null
 -- cid cname description
+CREATE TABLE category(
+    catid int PRIMARY,
+    cname VARCHAR(30),
+    description VARCHAR(20)
+);
+
 -- 1 chips very crunchy
 -- 2 chocolate very chocolaty
 -- 3 snacks yummy
 -- 4 cold drinks thanda thanda cool cool
 
+
+
 -- 1. List all products with category chips
 
+select * from product p inner join category c on p.catid=c.catid where c.cname ='Chips';
+        
 -- 2. display all products sold by kirti
 
+    select * from product p inner join salesman s on p.sid=s.sid;
+
 -- 3. display all salesman who do not sold any product
+select s.* from salesman s left join product p on s.sid=p.pid where p.pid is null;
 
 -- 4. display all category for which no product is there
+    select c.* from product p left join category c on p.catid=c.catid where p.pid is null;
+
 
 -- 5. display all products with no category assigned
+select * from product where catid is null;
+
 
 -- 6. list all salesman who stays in city with name starts with P or N
 
+    select * from product p inner join salesman s on p.sid = s.sid where s.address like "P%" or s.address like "%N"
+
 -- 7. add new column in salesman table by name credit limit
+alter table salesman
+add column creditlimit double(9,2);
 
 -- ------------------------------
