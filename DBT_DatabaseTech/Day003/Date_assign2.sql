@@ -103,7 +103,7 @@ HAVING number_of_employees > 10;
 
 -- 20. Write a query to get the department ID, year, and number of employees joined.   
 
-SELECT   deptno , year , count(empno) from EMP;
+ select deptno , YEAR(hiredate) as year , count(empno) from EMP GROUP BY deptno,year;
 
   
  
