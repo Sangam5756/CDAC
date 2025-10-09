@@ -41,7 +41,7 @@ public class ShoeserviceImpl implements ShoeService {
 
 		shoes.put(shoeId, new Shoe(shoeId, ratings, name, brand, price, available, shoetype));
 
-	}
+	}  
 	
 
 	@Override
