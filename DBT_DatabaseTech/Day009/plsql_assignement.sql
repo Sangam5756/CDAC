@@ -247,24 +247,16 @@ DELIMITER ;
 -- the procedure should accept empno, ename, sal, job, hiredate as input parameter 
 -- write insert statement inside procedure insert_rec to add one record into table 
  
- 
+DELIMITER //
+
 create procedure insert_rec(peno int,pnm varchar(20),psal decimal(9,2),pjob 
 varchar(20),phiredate date) 
 begin 
      insert into emp(empno,ename,sal,job,hiredate) 
 values(peno,pnm,psal,pjob,phiredate) 
 end// 
- 
 
-
-
-
-
-
-
-
-
-
+DELIMITER ; 
 
 
 
@@ -272,27 +264,139 @@ end//
 -- the procedure should accept empno as input parameter. 
 -- write delete  statement inside procedure delete_emp to delete one record from emp 
 -- table 
+DELIMITER //
+create procedure deleteRec(in pempno int)
+BEGIN
+        delete  from emp where empno=pempno;
+
+END;
+//
+DELIMITER ;
+
+
+
+
+
+
 -- 4. write a procedure to display empno,ename,deptno,dname for all employees with sal 
 -- > given salary. pass salary as a parameter to procedure 
+
+DELIMITER //
+create procedure displayEmpsal(in psal int )
+    BEGIN
+
+        select e.empno , e.ename,e.deptno,d.dname from emp e inner join dept d on e.deptno=d.deptno
+        where sal > psal; 
+
+    END //
+DELIMITER ;
+
+
+
+
+
+
 -- 5. write a procedure to find min,max,avg of salary and number of employees in the 
 -- given deptno. 
 -- deptno --→ in parameter  
 -- min,max,avg and count ---→ out type parameter 
 -- execute procedure and then display values min,max,avg and count 
+
+
+DELIMITER //
+    create procedure displayAggr(in pdeptno int  , out min int, out max int,out avg double(9,2),out count int )
+begin 
+        SELECT MIN(SAL), MAX(SAL),AVG(SAL),COUNT(*) INTO min,max,avg,count FROM emp
+        where deptno = pdeptno GROUP BY deptno;
+
+end ;
+//
+DELIMITER ;
+
+
 -- 6. write a procedure to display all pid,pname,cid,cname and salesman name(use 
 -- product,category and salesman table) 
+
+DELIMITER //
+CREATE PROCEDURE displayAllProduct()
+BEGIN
+        select p.pid,p.pname,c.catid,c.cname,s.sname from product p join category c on p.cid=c.catid join salesman s
+        on p.sid=s.sid;    
+END;
+// DELIMITER ;
+
+
+
+
+
 -- 7. write a procedure to display all vehicles bought by a customer. pass customer name 
 -- as a parameter.(use vehicle,salesman,custome and relation table) 
+
+mysql> select * from cust_vehicle;
++--------+------+------+-----------+
+| custid | vid  | sid  | buy_price |
++--------+------+------+-----------+
+|      1 |    1 |   10 |  75000.00 |
+|      1 |    2 |   10 | 790000.00 |
+|      2 |    3 |   11 |  80000.00 |
+|      3 |    3 |   11 |  75000.00 |
+|      3 |    2 |   10 | 800000.00 |
++--------+------+------+-----------+
+
+DELIMITER //
+create procedure displayAllsaledVehicle(in vname varchar(20))
+begin
+        select * from cust_vehicle cv  join vehicle v on cv.vid=v.vid join salesman s on cv.sid=s.sid;
+end;
+//
+DELIMITER ;
+
+
 -- 8. Write a procedure that displays the following information of all emp 
 -- Empno,Name,job,Salary,Status,deptno 
 -- Note: - Status will be (Greater, Lesser or Equal) respective to average salary of their own 
 -- department. Display an error message Emp  table is empty if there is no matching 
 -- record. 
+
+DELIMITER //
+create procedure displayEmpInfo()
+BEGIN
+        -- first take what we need
+        select e.empno,e.ename,e.job,e.sal,d.deptno,
+        CASE
+        WHEN e.sal > avg_sal then "GREATER"
+        WHEN e.sal < avg_sal then "LESSER"
+        ELSE 'EQUAL'
+        END as STATUS from emp e join (select deptno,avg(sal) as avg_sal from emp GROUP BY deptno)as d on e.deptno=d.deptno;
+        
+END ;
+//
+DELIMITER ;
+
+
+
 -- 9. Write  a procedure to update salary in emp table based on following rules. 
 -- Exp< =35 then no Update 
 -- Exp> 35 and <=38 then 20% of salary 
 -- Exp> 38 then 25% of salary 
  
+ DELIMITER //
+ create procedure updateSalary()
+begin
+        update  emp
+        SET sal = CASE
+        
+        when TIMESTAMPDIFF(YEAR,hiredate,curdate()) BETWEEN 35 and 38 then sal * 1.20
+        when TIMESTAMPDIFF(YEAR,hiredate,curdate()) > 38 then sal * 1.25
+        END
+        where TIMESTAMPDIFF(YEAR,hiredate,curdate()) > 35;
+        
+end; //
+DELIMITER ;
+
+
+
+
 -- 10. Write a procedure and a function. 
 -- Function: write a function to calculate number of years of experience of employee.(note: 
 -- pass hiredate as a parameter) 
@@ -311,6 +415,9 @@ end//
 -- experience int, 
 -- allowance decimal(9,2)); 
  
+
+
+
 -- 11. Write a function to compute the following. Function should take sal and hiredate 
 -- as i/p  and return the cost to company. 
 -- DA = 15% Salary, HRA= 20% of Salary, TA= 8% of Salary. 
@@ -320,9 +427,13 @@ end//
 -- >=2 Year< 4 Year 20% of Salary 
 -- >4 Year 30% of Salary 
  
+
+
+
 -- 12.  Write query to display empno,ename,sal,cost to company for all employees(note: 
 -- use function written in question 10) 
  
+
  
 -- Q2. Write trigger 
 -- 1. Write a tigger to store the old salary details in Emp _Back (Emp _Back has the 
