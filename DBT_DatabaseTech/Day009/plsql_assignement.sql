@@ -265,33 +265,27 @@ DELIMITER ;
 -- write delete  statement inside procedure delete_emp to delete one record from emp 
 -- table 
 DELIMITER //
-create procedure deleteRec(in pempno int)
+CREATE PROCEDURE deleteRecord(vempno varchar(20))
 BEGIN
-        delete  from emp where empno=pempno;
+
+    DELETE from EMP where empno = vempno;
 
 END;
 //
 DELIMITER ;
 
 
-
-
-
-
 -- 4. write a procedure to display empno,ename,deptno,dname for all employees with sal 
 -- > given salary. pass salary as a parameter to procedure 
-
 DELIMITER //
-create procedure displayEmpsal(in psal int )
-    BEGIN
+CREATE PROCEDURE dispEmp(vsal double(9,2))
+begin
+    select * from EMP
+    where sak > vsal;
 
-        select e.empno , e.ename,e.deptno,d.dname from emp e inner join dept d on e.deptno=d.deptno
-        where sal > psal; 
-
-    END //
+end;
+//
 DELIMITER ;
-
-
 
 
 
@@ -302,17 +296,14 @@ DELIMITER ;
 -- min,max,avg and count ---→ out type parameter 
 -- execute procedure and then display values min,max,avg and count 
 
-
 DELIMITER //
-    create procedure displayAggr(in pdeptno int  , out min int, out max int,out avg double(9,2),out count int )
-begin 
-        SELECT MIN(SAL), MAX(SAL),AVG(SAL),COUNT(*) INTO min,max,avg,count FROM emp
-        where deptno = pdeptno GROUP BY deptno;
+CREATE PROCEDURE dispAggregation( IN vdeptno INT,OUT vmin DECIMAL(10,2),OUT vmax DECIMAL(10,2),OUT vavg DECIMAL(10,2),OUT vcount INT)
+begin
+        select MAX(sal), MIN(sal),AVG(sal) into vmax,vmin,vavg,vcount from EMP
+        where deptno = vdeptno;
 
-end ;
-//
+end; //
 DELIMITER ;
-
 
 -- 6. write a procedure to display all pid,pname,cid,cname and salesman name(use 
 -- product,category and salesman table) 
@@ -433,8 +424,9 @@ DELIMITER ;
 -- 12.  Write query to display empno,ename,sal,cost to company for all employees(note: 
 -- use function written in question 10) 
  
-
  
+
+
 -- Q2. Write trigger 
 -- 1. Write a tigger to store the old salary details in Emp _Back (Emp _Back has the 
 -- same structure as emp table without any 

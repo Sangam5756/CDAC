@@ -69,6 +69,7 @@ where cs.vid = v.vid and cs.sid = s.sid and cs.custid =c.custid;
 select c.cname , v.vname, s.sname from customer c, Vehicle v , salesman s,cust_vehicle cs
 where cs.vid = v.vid and cs.sid = s.sid and cs.sid  in (select sid from salesman where address = 'Pune') and cs.custid =c.custid ;
 
+
 -- 5. find how many customers bought motor bike
 select count(*) from cust_vehicle cv, vehicle v
 where  cv.vid = v.vid and cv.vid in (select vid from vehicle where vname = 'Motor bike');
