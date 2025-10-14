@@ -404,7 +404,7 @@ DELIMITER ;
 -- ename varchar(20), 
 -- hiredate date, 
 -- experience int, 
--- allowance decimal(9,2)); 
+-- allowance decimal(9,2));
  
 
 

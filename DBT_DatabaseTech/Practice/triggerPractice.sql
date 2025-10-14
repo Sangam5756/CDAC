@@ -167,4 +167,48 @@ end; //
 delimiter ;
 
 
+-- 
+
+
+
+-- trigger what to do
+--  change the empnaem trigger
+-- first craete logable
+-- then craete teigger
+-- then test it
+
+
+
+create table logname(
+    logid int PRIMARY key auto_increment,
+    empno int,
+    oldname varchar(30),
+    newname varchar(30),
+    updatetime TIMESTAMP default CURRENT_TIMESTAMP
+);
+
+
+delimiter //
+create trigger logempname
+after update on employee
+for each row
+begin
+        if old.emp_name <> new.emp_name
+        then 
+        insert into logname(empno,oldname,newname) values 
+        (old.empno,old.emp_name,new.emp_name);
+        end if;
+
+end;//
+delimiter;
+
+update employe
+set emp_name = 
+
+
+select * from department d left join
+employee e on d.dept_id=e.deptno 
+where e.deptno is null;
+
+
 

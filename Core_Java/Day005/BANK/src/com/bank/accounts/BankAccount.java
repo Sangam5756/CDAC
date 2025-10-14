@@ -8,7 +8,7 @@ public class BankAccount {
 	private static int accountNumberIncrement;
 
 	static {
-		accountNumberIncrement = 10000;
+		accountNumber	Increment = 10000;
 	}
 
 	public BankAccount(double balance, String name, String phoneNumber) {
