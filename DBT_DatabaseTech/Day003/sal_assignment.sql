@@ -274,6 +274,24 @@ CREATE Table Marks(
 -- add new column in emp table netsal with constraint default 1000
 
 
+ALTER TABLE emp
+ADD CONSTRAINT pk_emp PRIMARY KEY (empno);
+
+ALTER TABLE dept
+ADD CONSTRAINT pk_dept PRIMARY KEY (deptno);
+
+ALTER TABLE salgrade
+ADD CONSTRAINT pk_salgrade PRIMARY KEY (grade);
+
+ALTER TABLE emp
+ADD CONSTRAINT fk_emp_dept
+FOREIGN KEY (deptno)
+REFERENCES dept(deptno);
+
+ALTER TABLE emp
+ADD netsal DECIMAL(10,2) DEFAULT 1000;
+
+
 
 -- 35. Update employee sal ---- increase sal of each employee by 15 % sal +comm, change the job
 
@@ -413,6 +431,12 @@ create table category(
 
 -- 1. list all product name,their category name and name of a person, who sold that product
 
+SELECT p.pname AS Product_Name,
+       c.cname AS Category_Name,
+       s.sname AS Salesman_Name
+FROM product p
+JOIN category c ON p.catid = c.cid
+JOIN salesman s ON p.sid = s.sid;
 
 
 
@@ -430,6 +454,7 @@ create table category(
 
 -- 1. list all courses for which no room is assigned. And all rooms for which are
 -- available
+
 
 
 -- 2. list all faculties who are not allocated to any course and rooms which are not

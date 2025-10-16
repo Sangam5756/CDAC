@@ -406,6 +406,65 @@ DELIMITER ;
 -- experience int, 
 -- allowance decimal(9,2));
  
+CREATE TABLE employee (
+  empno INT PRIMARY KEY,
+  ename VARCHAR(20),
+  hiredate DATE,
+  sal DECIMAL(9,2)
+);
+
+
+CREATE TABLE emp_allowance (
+  empno INT,
+  ename VARCHAR(20),
+  hiredate DATE,
+  experience INT,
+  allowance DECIMAL(9,2)
+);
+
+
+DELIMITER //
+CREATE FUNCTION calc_experience(hire_date DATE)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+  DECLARE years INT;
+  SET years = TIMESTAMPDIFF(YEAR, hire_date, CURDATE());
+  RETURN years;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE add_emp_allowance()
+BEGIN
+  DECLARE done INT DEFAULT 0;
+  DECLARE v_empno INT;
+  DECLARE v_ename VARCHAR(20);
+  DECLARE v_hiredate DATE;
+  DECLARE v_exp INT;
+  DECLARE v_allow DECIMAL(9,2);
+  
+  DECLARE cur CURSOR FOR SELECT empno, ename, hiredate FROM employee;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+  
+  OPEN cur;
+  read_loop: LOOP
+    FETCH cur INTO v_empno, v_ename, v_hiredate;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+    
+    SET v_exp = calc_experience(v_hiredate);
+    SET v_allow = v_exp * 3000;
+    
+    INSERT INTO emp_allowance VALUES (v_empno, v_ename, v_hiredate, v_exp, v_allow);
+  END LOOP;
+  CLOSE cur;
+END //
+DELIMITER ;
+
+
 
 
 
@@ -419,11 +478,42 @@ DELIMITER ;
 -- >4 Year 30% of Salary 
  
 
+DELIMITER //
+CREATE FUNCTION compute_ctc(sal DECIMAL(9,2), hire_date DATE)
+RETURNS DECIMAL(9,2)
+DETERMINISTIC
+BEGIN
+  DECLARE exp_years INT;
+  DECLARE special DECIMAL(9,2);
+  DECLARE total DECIMAL(9,2);
+  
+  SET exp_years = TIMESTAMPDIFF(YEAR, hire_date, CURDATE());
+  
+  IF exp_years < 1 THEN
+    SET special = 0;
+  ELSEIF exp_years < 2 THEN
+    SET special = sal * 0.10;
+  ELSEIF exp_years < 4 THEN
+    SET special = sal * 0.20;
+  ELSE
+    SET special = sal * 0.30;
+  END IF;
+  
+  SET total = sal + (sal * 0.15) + (sal * 0.20) + (sal * 0.08) + special;
+  RETURN total;
+END //
+DELIMITER ;
 
 
 -- 12.  Write query to display empno,ename,sal,cost to company for all employees(note: 
 -- use function written in question 10) 
- 
+ SELECT 
+  empno,
+  ename,
+  sal,
+  compute_ctc(sal, hiredate) AS cost_to_company
+FROM employee;
+
  
 
 
@@ -456,6 +546,50 @@ DELIMITER ;
 --     chdate date; 
 --     action varchar(20) 
 -- ); 
+CREATE TABLE emp_back(
+  empno INT,
+  ename VARCHAR(20),
+  oldsal DECIMAL(9,2),
+  newsal DECIMAL(9,2)
+);
+
+DELIMITER //
+CREATE TRIGGER trg_emp_sal_update
+BEFORE UPDATE ON employee
+FOR EACH ROW
+BEGIN
+  INSERT INTO emp_back VALUES (OLD.empno, OLD.ename, OLD.sal, NEW.sal);
+END //
+DELIMITER ;
+
+CREATE TABLE emp_audit(
+  empno INT,
+  ename VARCHAR(20),
+  username VARCHAR(20),
+  chdate DATE,
+  action VARCHAR(20)
+);
+DELIMITER //
+
+CREATE TRIGGER trg_emp_insert
+AFTER INSERT ON employee
+FOR EACH ROW
+BEGIN
+  INSERT INTO emp_audit VALUES (NEW.empno, NEW.ename, USER(), CURDATE(), 'INSERT');
+END //
+
+CREATE TRIGGER trg_emp_delete
+AFTER DELETE ON employee
+FOR EACH ROW
+BEGIN
+  INSERT INTO emp_audit VALUES (OLD.empno, OLD.ename, USER(), CURDATE(), 'DELETE');
+END //
+
+DELIMITER ;
+
+
+
+
 -- 3. Create table vehicle_history. Write a trigger to store old vehicleprice and new vehicle 
 -- price in history table before you update price in vehicle table 
 -- (note: use vehicle table). 
@@ -468,6 +602,32 @@ DELIMITER ;
 -- username varchar(20) 
 -- ); 
  
+ CREATE TABLE vehicle (
+  vno INT PRIMARY KEY,
+  vname VARCHAR(20),
+  price DECIMAL(9,2)
+);
+
+CREATE TABLE vehicle_history(
+  vno INT,
+  vname VARCHAR(20),
+  oldprice DECIMAL(9,2),
+  newprice DECIMAL(9,2),
+  chdate DATE,
+  username VARCHAR(20)
+);
+
+DELIMITER //
+CREATE TRIGGER trg_vehicle_update
+BEFORE UPDATE ON vehicle
+FOR EACH ROW
+BEGIN
+  INSERT INTO vehicle_history VALUES (
+    OLD.vno, OLD.vname, OLD.price, NEW.price, CURDATE(), USER()
+  );
+END //
+DELIMITER ;
+
  
  
  

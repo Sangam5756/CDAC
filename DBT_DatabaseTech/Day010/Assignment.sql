@@ -42,6 +42,9 @@
 -- select empno,ename,job, generateEmail(ename,job)
 -- from emp;
 
+
+
+
 -- 2. calculate experience of a employee
 -- delimiter //
 -- create function calcexp(edate date) returns int
