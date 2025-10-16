@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Calculator Form</title>
+</head>
+<body>
+	<form action="calculate" method="get">
+		<table style="background-color: lightgrey; margin: auto" border="1">
+
+			<tr>
+				<td>Enter 1st Number</td>
+				<td><input type="number" name="num1" required /></td>
+			</tr>
+			<tr>
+				<td>Enter 2nd Number</td>
+				<td><input type="number" name="num2" required /></td>
+			</tr>
+			<tr>
+				<td>Choose Operation</td>
+				<td><select name="action" required>
+						<option value="">Select</option>
+						<option value="add">Add</option>
+						<option value="subtract">Subtract</option>
+						<option value="multiply">Multiply</option>
+						<option value="divide">Divide</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Calculate" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
