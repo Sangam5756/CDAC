@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.healthcare.dao.AppointmentDao;
 import com.healthcare.dao.AppointmentDaoImpl;
-import com.healthcare.pojos.AppointmentDetails;
+import com.healthcare.dto.AppointmentDetailsDto;
 import com.healthcare.pojos.Patient;
 
 import jakarta.servlet.ServletConfig;
@@ -34,7 +34,11 @@ public class PatientDashboard extends HttpServlet {
 	}
 
 	public void destroy() {
-		// TODO Auto-generated method stub
+		try {
+			appointment.cleanup();
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,9 +50,10 @@ public class PatientDashboard extends HttpServlet {
 		try (PrintWriter pw = response.getWriter()) {
 
 			Patient p = (Patient) (session.getAttribute("patientDetails"));
-
+				String message = (String)session.getAttribute("message");
+				System.out.println(message);
 			if (p != null) {
-				List<AppointmentDetails> allAppointments = appointment.DisplayAppointment(p.getId());
+				List<AppointmentDetailsDto> allAppointments = appointment.DisplayAppointment(p.getId());
 
 				pw.print("<h3>Hello &nbsp;&nbsp;" + p.getName() + "</h3>");
 
@@ -67,14 +72,14 @@ public class PatientDashboard extends HttpServlet {
 				pw.println("<tbody>");
 
 //       printing the rows
-				for (AppointmentDetails a : allAppointments) {
+				for (AppointmentDetailsDto a : allAppointments) {
 					pw.println("<tr>");
 
 					pw.println("<td>" + a.getAppointment_id() + "</td>");
 					pw.println("<td>" + a.getDocName() + "</td>");
 					pw.println("<td>" + a.getAppointMentDateTime() + "</td>");
 
-					pw.println("<td>" + "<p><a href='cancelappointment'> Cancel</a> </p>" + "</td>");
+					pw.println("<td>" + "<p><a href='cancelappointment?appointmentId="+a.getAppointment_id()+"'> Cancel</a> </p>" + "</td>");
 
 					pw.println("</tr>");
 				}
