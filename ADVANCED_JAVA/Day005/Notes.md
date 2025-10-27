@@ -1,6 +1,4 @@
 
----
-
 ## 🧠 Servlet–JSP Web App Flow (Step-by-Step Notes)
 
 ---
