@@ -1,0 +1,40 @@
+INSERT INTO users (user_id, created_on, last_updated, dob, email, first_name, last_name, password, phone, reg_amount, role)
+VALUES
+(1, '2025-10-01', '2025-10-10 11:00:00', '1980-06-15', 'dr.rajiv@medcare.com', 'Rajiv', 'Mehta', '$2a$10$xyz', '9876543210', 0, 'ROLE_DOCTOR'),
+(2, '2025-10-01', '2025-10-10 11:00:00', '1985-03-10', 'dr.sonal@medcare.com', 'Sonal', 'Deshmukh', '$2a$10$xyz', '9876501122', 0, 'ROLE_DOCTOR'),
+(3, '2025-10-02', '2025-10-10 12:00:00', '1995-12-01', 'ankit.pat@medcare.com', 'Ankit', 'Patil', '$2a$10$xyz', '9822045678', 500, 'ROLE_PATIENT'),
+(4, '2025-10-02', '2025-10-10 12:00:00', '2000-08-25', 'sneha.j@medcare.com', 'Sneha', 'Joshi', '$2a$10$xyz', '9811122233', 700, 'ROLE_PATIENT'),
+(5, '2025-10-03', '2025-10-10 12:00:00', '1978-02-18', 'admin@medcare.com', 'System', 'Admin', '$2a$10$xyz', '9999999999', 0, 'ROLE_ADMIN');
+
+
+INSERT INTO doctors (doctor_id, created_on, last_updated, experience_in_years, fees, qualifications, speciality, user_id)
+VALUES
+(1, '2025-10-01', '2025-10-10 11:00:00', 15, 800, 'MBBS, MD', 'Cardiology', 1),
+(2, '2025-10-01', '2025-10-10 11:00:00', 10, 600, 'MBBS, MS', 'Orthopedics', 2);
+
+INSERT INTO patients 
+(patient_id, created_on, last_updated, blood_group, family_history, gender, user_id)
+VALUES
+(1, '2025-10-02', '2025-10-10 12:00:00', 'B_POSITIVE', 'Father has hypertension; mother diabetic.', 'MALE', 3),
+(2, '2025-10-02', '2025-10-10 12:00:00', 'O_NEGATIVE', 'No significant family history.', 'FEMALE', 4);
+
+
+INSERT INTO diagnostic_tests (id, created_on, last_updated, description, name, price)
+VALUES
+(1, '2025-10-01', '2025-10-01 12:00:00', 'Complete blood count (CBC)', 'Blood Test', 500),
+(2, '2025-10-01', '2025-10-01 12:00:00', 'Electrocardiogram test for heart', 'ECG', 1000),
+(3, '2025-10-01', '2025-10-01 12:00:00', 'Chest X-Ray screening', 'X-Ray', 800),
+(4, '2025-10-01', '2025-10-01 12:00:00', 'Brain MRI scan', 'MRI', 5000);
+
+
+
+
+INSERT INTO appointments
+(appointment_id, created_on, last_updated, appointment_date_time, status, doctor_id, patient_id)
+VALUES
+(1, CURDATE(), NOW(), '2025-11-08 10:30:00', 'SCHEDULED', 1, 1),
+(2, CURDATE(), NOW(), '2025-11-18 15:00:00', 'SCHEDULED', 2, 2),
+
+(5, CURDATE(), NOW(), '2025-11-15 09:30:00', 'SCHEDULED', 1, 2),
+(6, CURDATE(), NOW(), '2025-11-14 17:00:00', 'SCHEDULED', 2, 1);
+

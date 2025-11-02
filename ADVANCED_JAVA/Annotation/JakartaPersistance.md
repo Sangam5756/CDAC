@@ -147,20 +147,35 @@ private double tempPrice;
 
 **Why:** Used for fields needed only in Java logic, not in DB.
 
----
 
-### 🗂️ **12. `@Embeddable`** and **`@Embedded`**
+### 🔁 **12. `CascadeType`**
 
-**Meaning:** Used to group reusable fields into a separate component.
+**Meaning:** Controls which operations performed on a parent entity are automatically propagated to its related child entities.
+
 **Example:**
-
 ```java
-@Embeddable
-public class Address { private String city; private String state; }
-
-@Embedded
-private Address address;
+@OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
+private List<OrderItem> items;
 ```
 
-**Why:** Keeps entity classes clean by reusing value-type components.
+**Common cascade options:**
+- CascadeType.PERSIST — cascade save/insert to children.
+- CascadeType.MERGE — cascade merge/update to children.
+- CascadeType.REMOVE — cascade delete to children.
+- CascadeType.REFRESH — cascade refresh state from DB.
+- CascadeType.DETACH — cascade detach from persistence context.
+- CascadeType.ALL — shorthand for all of the above.
 
+**Why:** Simplifies entity lifecycle management when child entities should follow the parent (e.g., saving an Order also saves its OrderItems).
+
+**Notes / Best practices:**
+- Use cascading only when child lifecycle is bound to parent. Avoid cascading REMOVE for shared entities.
+- For deleting children when removed from a collection, prefer orphanRemoval = true.
+- Be careful with CascadeType.ALL on complex graphs — it can cause unexpected deletes or performance issues.
+- Test cascades in transactional scenarios to ensure correct behavior.
+
+### 🔧 Example with orphan removal:
+```java
+@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+private List<OrderItem> items;
+```

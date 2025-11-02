@@ -24,26 +24,6 @@ public interface ProductDao {
 	public String uploadImage(Long userId, String filePath) throws IOException;
 
 	public String restoreImage(String email,String path) throws IOException;
-	/*
-	 * 
-	 * Solve as many as possible ( No Pressure !!!) 1. Add a new product i/p -
-	 * product details (except id) o/p - message (success or failure)
-	 * 
-	 * 2. Display product details i/p - product id o/p - product details OR error
-	 * message
-	 * 
-	 * 3. Display id , name , price of all the products manufactured before
-	 * specified date and from specific category i/p - date , category(enum) o/p -
-	 * List of selected products details
-	 * 
-	 * 4. Change Product price i/p - product name o/p - message
-	 * 
-	 * OPTIONAL
-	 * 
-	 * 5. Apply discount to all products , whose available quantity > specified
-	 * quantity i/p - quantity n discount in % o/p - message
-	 * 
-	 * 
-	 */
+	
 
 }

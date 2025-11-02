@@ -1,0 +1,238 @@
+Enter Spring 
+Today's Topics : 
+Why Spring 
+What is it ?
+Dependency Injection / IoC
+Spring Bean life cycle
+Bean Wiring
+Pure XML based appraoch
+Hybrid Approach
+
+
+Why Spring ?
+
+1. Simplifies overall java development
+2. Allows the developers to create loosely coupled applications.
+Spring Manages the dependencies , so that dependent objects are completely de coupled from the dependencies.
+3. Supplies ready made implementation of design patterns (singleton , factory , proxy , MVC , front controller n many more)
+Spring supports the MVC pattern for developing monolithic web application as well as RESTful web services. 
+4. Reduces Boilerplate code.
+5. Helps to build Easy, Simple, and Lightweight applications
+6. Excellent support for JDBC as well as ORM , along with automatic transaction management support
+7. Modular and non intrusive design
+8. Provides smooth integration with other frameworks such as Hibernate , Struts , EJB.
+9. Supports AOP (Aspect oriented programming) for the separation n modularization of cross cutting concerns (=repetative tasks) from the core tasks
+(eg - request handling logic : controller bean , B.L - service bean, DAO - data access logic)
+10. Supports Unit testing as well as integration testing
+11. Developing n Securing web apps as well as RESTful web services becomes easy 
+12. Excellent support for building Microservices based architecture.
+13. Spring AI...
+
+2. What is it ?
+1. It is a container, since it manages life cycle of spring beans
+What is a spring bean ?
+It is a  java class (object) whose life cycle is completely managed by SC(spring container)
+eg of spring beans - REST controller, controller, service,DAO.
+2. It is Framework of frameworks -
+It is a modular n extensive framework , containing lot of frameworks.
+Why it is a framework ?
+It provides ready made implementation of standard design patterns(eg :MVC,Front Controller , Proxy,singleton,factory, ORM ...)
+It's a modular n extensive framework.
+Eg – spring core , web , ORM , Transactions, spring boot , spring security , spring cloud …..
+3. Overview of Spring frmwork modules 
+refer to diagram - "Spring Reference Material\diagrams\spring-framework-modules.png"
+
+4. Compare the layers :
+Refer to - "day12_help\Spring\diagrams\Comparison of Servlet Layers Vs Spring MVC Layers.png"
+
+5. Why Spring 
+It helps us to build loosely coupled applications using 
+Dependency Injection (D.I)
+Aspect Oriented Programming (AOP)
+5.1 What is dependency injection(D.I) ?
+Background 
+In the earlier programming model, 
+The Layers used were 
+JSP|Servlet-service layer(Service Layer) -DAO(Utils) - POJO -DB 
+Dependent Objects – JavaBean(Service Layer) , Hibernate based DAO, JDBC Based DAO
+Dependencies --- DAO,HibernateUtils(to provide SessionFactory) , DBUtils(to provide a Fixed DB connection)
+All of these  are the examples of tight coupling.
+Why ?
+Any time the nature of the dependency changes , dependent object is affected
+(Meaning -  you will have to make changes in dependent object as well !)
+eg : When the dependency of service layer changes from JDBC Based DAO to Hibernate based DAO , in case of user authentication , javabean class has to be modified to handle invalid login case(i.e handle NoResultException)
+Tight coupling is strongly un desirable 
+Since it's difficult to maintain or extend the application.
+
+Why earlier programming model was leading to tight coupling ?
+Dependent objects were managing their dependencies , in this traditional|conventional programming model.
+eg : In above examples , service layer creates the instance of DAO.
+Hibernate based DAO , gets SessionFactory from HibernateUtils.
+JDBC based DAO ,gets DB connection from DBUtils. 
+What is D.I ?
+(Dependency injection=wiring=collaboration between dependent & dependency)
+It is a design pattern that tries to decouple dependent  objects from their dependencies. 
+Instead of creating their own dependencies internally, dependent objects receive the dependencies from the 3rd party (eg Spring Container) directly at run time. 
+This approach leads to loose coupling ,which leads further to maintainable code .
+In the conventional programming , the control of managing dependencies is  with dependent objects.
+Now onwards, since  dependent objects are no longer managing dependencies , it is called - Inversion of control(IoC)
+Summary - 
+Hollywood principle states - You don't call us , we will call you!
+SC is telling  these dependent objs - not to manage their dependencies , since it will be automatically  provided by SC(Spring Container)
+eg : UserController – request handling logic (P.L) -- dependent
+@Autowired //auto wiring - dependency
+private UserService service;
+OR 
+In User DAO layer
+@AutoWired
+private SessionFactory sf;
+6.  Extract spring api-docs , from 
+"Spring Reference Material\javadocs\spring-javadocs.rar"
+7. Objective -  Create Spring based standalone java project
+Development steps
+1. Create Maven based Java SE project with spring dependencies
+Simply import test_spring_core, in your STS 4 workspace.
+2. Create dependent n dependency classes 
+3. Under <resources> ,  create spring bean config xml file.(Using STS 4.x support)
+This support does not exist under STS 4.x
+4. Add namespace <beans>
+To Configure SC(Spring container) using xml based meta data instructions
+
+Add <bean> tags in the xml file , to configure Java classes as spring beans
+
+5. Important Attributes of <bean> tag
+1. id - mandatory attribute 
+Refers to bean unique identifier
+2. class - mandatory attribute 
+ Fully qualified bean class name
+3. scope - optional   
+Default scope = singleton
+In a standalone main based application , only 2 scopes are supported.
+singleton | prototype
+In a web application 
+ - singleton | prototype | request | session | global session (global session  is supported  ONLY under portlet based architecture)
+Meaning 
+singleton - Spring Container(SC) will create & share single bean instance for multiple requests/demands(made via context.getBean)
+prototype - SC creates a NEW bean instance per  request/demand.
+
+4. lazy-init - boolean attribute. default value=false.
+Applicable only to singleton beans.
+(i.e prototype scoped beans are ALWAYS created lazily one / demand)
+By  default ,  SC will automatically create singleton spring bean instance the SC start up.
+5. init-method - to specify the name of custom init method
+default pattern of the init method
+ public void anyName() throws Exception
+{init logic}
+- It will be automatically called by SC after  D.I
+It will be called for singleton as well as prototype beans.
+6. destroy-method -to specify the name of custom  destroy  method
+default pattern of the destroy method
+ public void anyName() throws Exception
+{shutdown / cleanup logic}
+- It will be automatically called by SC before garbage collection of singleton spring bean 
+6. SC API 
+6.1 Refer to a diagram.
+"day11-data \day11_help\diagrams\Spring Container API (incomplete).png"
+How To start SC , in the standalone environment 
+-	Create instance of o.s.context.support.ClasspathXmlApplicationContext(String configFile) throws BeansException 
+-	Un checked exception
+-	It implements AutoCloseable i/f
+-	Represents a standalone SC started using XML based instructions , loaded from run time class path (<resources>)
+
+6.2 How to get ready to use spring bean from SC ?
+API of BeanFactory
+public <T> T getBean(String beanId,Class<T> beanClass) throws BeansException
+T -  type of the spring bean
+
+7. Spring bean life cycle
+Refer to a diagram
+- "Spring Reference Material\diagrams\spring-bean-life-cycle.png"
+
+8. Types of wiring in explicit mode 
+setter Based D.I 
+Constructor based D.I 
+Solve – 
+  Create singleton n eager – public school
+  With mandatory dependencies of – funds(12345678) n teacher(sc) 
+  Optional dependency of – Sports coach (cricket)
+Factory Based D.I
+
+9. Types of wiring in implicit (auto wiring) mode 
+-  setter Based D.I 
+- Constructor based D.I 
+In auto wiring , XML tags reduce  BUT there is no reduction in Java code
+(i.e setters | parameterized construct) is still required.
+ <bean .... autowire="no|byName|byType|constructor>
+
+9.1 autoWire=byName|byType
+-Implies Setter Based D.I
+- to inject optional dependencies.
+-Prog must supply setters / dependency
+- No <property> tags in the xml.
+- In case of no dependencies found , SC DOES NOT throw any exception, but B.L fails(NullPointerException)
+
+autowire=byName 
+- SC tries to match , property name(reflected via setter) with dependency bean id
+ - in case of no match - B.L failure
+ - multiple matches - not possible
+ - in case of exact match -> D.I success -> no excs.
+
+
+autowire=byType 
+- SC tries to match , data type of the property (reflected via setter) with data type the dependency bean.
+
+ - in case of no match - B.L failure
+ - multiple matches - ambiguity -> SC throws NoUniqueBeanDefinitionException
+ - in case of exact match -> D.I success -> no excs.
+ 
+
+9.2 autowire=constructor
+- Implies Constructor Based D.I
+- to inject mandatory dependencies.
+- Prog must supply paramterized ctor , with arg / dependency
+- No <constrctor-arg> tags in the xml.
+- SC tries to match , data type of propeties (via parameterized ctor) with data type of depcy bean
+
+- In case of no dependencies found 
+ - SC throws NoSuchBeanDefinitionException
+
+- In case of multiple matches 
+ -SC throws - NoUniqueBeanDefinitionException
+
+- In case of exact match
+ - D.I successful - No errors !
+
+
+
+
+
+10. For hybrid approach 
+Refer -
+10.1 "day13-data\day13_help\spring sequence for annotations.txt"
+10.2 "Spring Reference Material\diagrams\xml vs annotations.png"
+
+Note this !
+Field level D.I (no setters n no paramterized ctor)
+1. @AutoWired //=> autowire=byType
+private Teacher myTeacher;
+In case of no match - SC throws the exception - NoSuchBeanDefinitionException
+In case multiple matches - NoUniqueBeanDefinitioExc
+In case exact match - no exceptionss --B.L works using dependenices .
+
+2. @AutoWired(required=false) //=> autowire=byType
+private Teacher myTeacher;
+In case of no match - B.L failure (NPExc) 
+In case multiple matches - NoUniqueBeanDefinitioExc
+In case exact match - no exceptions --B.L works using dependenices .
+
+
+3. @AutoWired //=> autowire=byType
+@Qualifier("eng") //=byName
+private Teacher myTeacher;
+
+In case of no match - SC throws the exception - NoSuchBeanDefinitionException
+In case multiple matches - NoUniqueBeanDefinitioExc
+In case exact match - no excs --B.L works using dependenices .
+
+
+

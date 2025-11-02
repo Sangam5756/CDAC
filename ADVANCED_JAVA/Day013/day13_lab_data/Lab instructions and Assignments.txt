@@ -1,0 +1,626 @@
+Day 1
+
+Mandatory exercise - everyone MUST complete it.
+1.Create a new workspace for web java
+2. Create new java project & add JDBC connector(mysql connector) in the build path.
+- Java Project -> Next -> Libraries -> ClassPath -> Add External Jar -> Browse & select "day1_data\day1_help\jdbc help\jdbc drivers\mysql-connector-j-9.3.0.jar"
+- Finish
+It should show you , a Referenced Library 
+- under package explorer.
+
+3. Revise JDBC steps
+
+4 create database 
+ - iacsd_25
+
+5. Create DBUtils class
+ - add public static method to create & return Connection.
+ - add db URL , username & password 
+
+6. Write a Tester class & test it.
+
+7. Refer to -
+"day1_data\day1_help\jdbc help\sql\healthcare sql.txt"
+Copy tables 
+ - doctors & patients
+- Copy DML.
+
+7. As discussed ,
+7.1 Write Java application to display all doctors details
+7.2 Write Java application to display all patients details
+
+
+Core Java topics revision - 
+
+8. import day1.1 in your new work space (web java work space)
+Revise
+8.1 Synchronization 
+ - with synchronized methods & blocks.
+Code from package - threads7 , threads9
+
+9. Revise ITC
+ - deadlocks , wait & notify
+Code from package - itc_with_sleep, itc_with_wait_notify
+
+10. Revise
+- cloning_shallow_copy
+- cloning_deep_copy
+
+11. Refer 
+ - "day1_data\day1_help\core java help\reflection\Java Reflection summary.txt"
+Code - test_reflection
+
+
+Day 2
+1. MANDATORY work
+
+1.1 Download & Extract Apache Tomcat Web server 
+- "web java prerequisites\Web Server n Jakarta EE docs\apache-tomcat-10.1.26.7z"
+- Save it under Study Materials | Software folder 
+- Add tomcat server to web java STS 4 workspace.
+
+How ? 
+
+Steps
+1. Change the perspective to Java EE
+ Window -> Perspective -> Change Perspective -> Other -> Java EE
+2. Choose Servers
+ - It will show you - NO servers
+3. Click on the link
+ - Choose Apache vendor & select Apache Tomcat 10.1
+4. Next -> Browse & Choose Tomcat Installation directory (Tomcat Home)
+5. Confirm JRE - JDK 21
+6. Finish
+7. Choose Apache Tomcat & start it. 
+8. Launch Server console & see if Tomcat is up & running.
+9. Create a dynamic web project ,to deploy monolithic web app (server side will render the view :HTTP  response content type : text/html)
+10. Configure web.xml , with welcome file list.
+11. Add index.html : welcome page (home page) with welcome message
+
+12. Start Server side application
+Right click on web project -> Run as -> Servler side app -> choose server -> finish
+You can check the server console.
+
+IDE will automatically a chrome (default web browser) & send a request to the web application.
+
+eg : 
+Request URL - http://localhost:8080/day2_web
+response  : index.html will be rendered.
+
+
+2. No need to import day2.1 
+ - It was created without layers.
+
+3. Directly import day2.2
+ - Edit MySql connecto JAR classpath
+ - Edit DB password , in DBUtils
+ - Revise CRUD functionality with layers.
+
+4. Mandatory assignment
+
+4.1 Patient sign in
+i/p - email , password
+o/p - Patient details (via Patient POJO ) or error message.
+
+4.2 Display patient details born between start date & end date
+i/p - start date , end date
+o/p - List of patient details
+
+4.3 Delete Patient Details
+i/p - patient id 
+o/p - a message (success | failure)
+
+4.4 Interesting work (Optional !)
+Book an appointment
+i/p - doctor_id, patient_id, appointment_datetime
+o/p - a message (booking successful or failed)
+
+
+Day 3
+Important Tip 
+Are you getting SQLException while deleting a patien record ?
+What is the reason ?
+Simple Solution
+- delete recs from the appointments table (child records)
+Then try it again
+
+OR
+Replace hard delete by soft delete.
+
+1. Hands on in combined lab
+1.1 Create dynamic web project (day3_lab)
+1.2 Create FirstServlet & deploy it with annotation
+- It should be eagerly loaded.
+1.3 Create Secondservlet & deploy it with xml tags
+- It should be loaded lazily (i.e after client sends a request)
+
+2. Refer to 
+- "day3_data\day3_help\HTML pages\calc.html"calc.html
+
+Write Calculator Servlet , to render the result of the specified operation.
+- singleton & lazy.
+
+3. Test Servlet & JDBC integration.
+- Patient Login
+
+4. Complete pending work.
+- in the  individual labs.
+
+
+Reading H.W
+1. "day3_data\day3_help\informal sequence.txt"
+2. "day3_data\day3_help\readmes\regarding HttpServlet.txt"
+
+
+
+Day 3
+1. Extract java docs
+- "day4_data\jakartaee-javadoc.7z"
+Open index.html in web browser.
+
+
+2. For reference , pls keep 
+"day4_data\day4_help\sequence.txt"
+
+
+4. import day4.1 in your workspace
+(import it exactly same as importing java projects)
+Edit DB password from DBUtils.java
+
+Revise entire flow
+Start from index.html
+-> login.html
+-> PatientLoginServlet
+-> PatientDashboardServlet
+Important points
+servlet-JDBC integration
+Redirect
+Cookie based session tracking
+
+6. import day4.2 in your workspace
+(import it exactly same as importing java projects)
+Edit DB password from DBUtils.java
+
+Open 
+-> PatientLoginServlet
+-> PatientDashboardServlet
+Important points
+Cookie based session tracking is replaced by HttPSession interface
+
+
+7. Mandatory assignment - 
+Simplest & easiest exercise to understand redirection & session tracking(cookie based)
+Continue with the yesterday's CalculatorServlet.
+You have already computed result of the operation yesterday right ?
+Continue with it.
+DO NOT display the result in CalculatorServlet.
+
+If the result of operation is >= 0 , redirect the client to next page
+- Result1Servlet
+-display message - Result is >=0 print actual result value
+
+Otherwise (result < 0) , redirect the client to next page 
+- Result2Servlet & display message - Result is <0  print actual result value.
+
+8. Optional assignment
+- Render upcoming patient appointments from the patient dashboard.
+
+Day 5
+In combined lab
+1. import day5.1 in your workspace.
+(import it exactly same as importing java projects)
+Edit DB password from DBUtils.java
+1.1 - walk through entire code , to revise the flow.
+1.2 Add Cancel Appointment functionality & test it.
+
+2. Troubleshooting Tips
+
+3.  import day5.2 in your workspace.
+(import it exactly same as importing java projects)
+Edit DB password from web.xml
+Revise servlet config & replace it by servlet context (if time permits !)
+
+
+4. In the individual labs - Mandatory work 
+Add new link in index.html
+Doctor Registration
+-> doctor_reg.html
+-> submit the form to DoctorRegServlet
+->  DoctorRegServlet invokes DoctorDao ->
+-> validate for unique email if not redirect the client to reg form again.
+-> If valid (i.e no dup email) , inserts a record & redirect the client to doctor login form.
+
+
+Day 6
+
+Revise JDBC & Servlets
+
+Day 7
+1. import day7.1 in your workspace
+- Revise basic JSP syntax
+- Keep readme_jsp.txt (or pdf) or your notes open.
+- Keep java docs open.
+
+2. Refer 
+- "day7_data\JSP basic assignment.png"
+We will discuss & solve it together in combined Lab.
+
+3. Mandatory work
+- Go through complete flow of HealthCare , using 
+day5_lab or your own solution , if you have created it.
+Tomorrow , we are going to port the same case study with MVC pattern
+- Servlet : controller
+- JSP : view layer(UI)
+- DAO , POJOs : data access layer & model.
+YOu can optionally create JavaBean based service layer as well.
+
+
+
+Day 8
+In the combined lab
+
+1. import day8_mvc in your workspace.
+- Revise MVC pattern , implementation & flow.
+- continue with the implementation.
+separation of concerns 
+- content generation(B.L) and presentation logic
+Tech stack - Servlet(controller) , JDBC based DAO , JSP based view layer, Model - POJOs/ DTOs
+
+- we will try to complete the case study from patient's perspective.
+
+
+
+In the individual labs - 
+Ensure that you have a stable net connection.
+Mandatory work - 
+Create <Template Projects> folder  in "web java study material folder "
+
+Download & extract - template projects\hibernate_template.7z"
+
+2. import existing Maven Project in your workspace.
+2.1 File - import - Maven -Existing Maven Project - Browse -
+template projects\hibernate_template
+Finish
+
+2.2 Force update the Maven , to download the dependencies. 
+R click on the project - Maven - Update Project - select the check box 'Force Update'
+
+This will create Maven local repository folder (under user home /.m2) - 1st time only .
+It will download hibernate dependencies(hibernate JARs , mysql connector jar) and cache it under Maven local repo.
+Then onwards you don't need a net connection (till spring !)
+
+
+3. import day8.1 as dynamic web project ( File - import - General - Existin Project)
+Revise 
+- URL rewriting (added in JSP basic assignment)
+
+4.  import day8.2 as dynamic web project ( File - import - General - Existin Project)
+Revise 
+
+- JSP Directives 
+ - include
+- JSP Actions
+ - forward , include , param
+
+5. Important Readmes 
+"day8_data\day8_help\mvc-help\Regarding MVC.txt"
+
+"day8_data\day8_help\regarding JSTL.txt" + "day8_data\day8_help\JSTL practice web project\jstl_demo"
+
+"day8_data\day8_help\regarding URL rewriting.txt"
+
+"day8_data\day8_help\readme_jsp.txt"
+
+Optional Extra help
+"day8_data\day8_help\JSP Using Java beans.txt"
+
+
+6. Optional weekend work (MVC implementation)
+Create new dynamic web project
+welcome page - /WEB-INF/pages/doctor_login.jsp
+-> login form 
+-> invalid -> forward doc to login form again
+-> valid -> redirect to Doctor dash board
+-> get required details -> forward to doc_dashbaord.jsp
+-> render doctor name & speciality
+-> List of his/her appointments (scheduled)
+- it should display patient name , phone no , date/time
+-> Add Complete/Done button.
+After the consultation  is done , doc should be able to change appointment status from SCHEDULED -> COMPLETED
+
+-> Add Cancel button.
+Due to some reason , doc should be able to cancel  appointment status from SCHEDULED -> CANCELLED
+
+
+Day 9
+
+1. import (if not done already !) 
+ - hibernate_template in your workspace 
+ - edit DB password (from hibernate.cfg.xml)
+
+2. Confirm booting of Hibernate framework (creation of SessionFactory & DBCP)
+- HibernateUtils class (package - com.healthcare.utils)
+
+3. Write a Tester to test.
+
+4. Confirm auto table creation
+- code first approach(i.e by writing Entity class) -> hibernate will create table. 
+- create a package - com.healthcare.entities
+Copy User.java & UserRole,.java , from "\day9_data\ready code"
+
+5. Add mandatory annotations
+
+6. Run the Tester again & confrim table creation.
+
+7. Add optional(but recommended) annotations to customize 
+ - table , columns & constraints
+
+8. Drop table & run tester again
+
+9. Create Hibernate based dao layer & testers
+Objectives
+9.1 Register user
+i/p – user details (except id, image)
+o/p – a  message to indicate success or failure
+
+9.2 Get User Details by user id
+i/p - user id
+o/p - null or actual user details
+
+9.3 Get all users.
+o/p - all user details
+
+
+In individual labs
+1. Revise FrontController + MVC implementation from 
+- "day9_data\code\healthcare_mvc_front_controller"
+
+
+Day 10
+Highlight - CRUD in Hibernate , Entity State Transitions with Session API
+
+1. import day10.1 , in your workspace as existing Maven Project
+1.1 Edit DB password from hibernate.cfg.xml
+
+1.2 To revise completely , Trace the code in top down manner
+- Testers
+
+1. UserRegistration.java - persist
+2. DisplayUserDetailsById.java - find & L1 caching
+3. DisplayAllUsers.java - JPQL & Query
+4. DisplayUsersByRoleAndDate.java -  JPQL & Query & named IN params (:paramName)
+5. DisplayUsersLastNamesByRole.java - single column projection
+6. DisplaySelectedUserDetailsByRole.java - multiple cols projection - JPQL ctor expression.
+7. ChangePassword.java - auto dirty checking (detached vs persistent)
+8. ApplyBulkDiscount.java - JPQL : update
+9. DeleteUserDetailsById.java - Entity - removed state.
+
+
+
+ Optional  assignment
+
+CRUD operations on Product (can be used later in eCommerce project)
+
+Typical product details -
+product id : Long (auto increment)
+name : string (unique) : varchar(50)
+product description : string : varchar(300)
+manufacture date : LocalDate
+price : double
+available quantity : int
+category : enum (STATIONARY,SHOES,GRAINS,OIL...)
+
+Dev steps 
+
+6.1 Continue with hibernate_template project.(copy it in day10_lab)
+6.2 Edit DB settings
+6.3 Copy earlier HibernateUtils class
+6.4 Create Product Entity from above description
+1.3 Create Product DAO , implementation class  n testers for the following
+(After writing DAO method at least once on your own , please copy the Hibernate DAO template  code)
+You can copy the testers from day10.1 &  make necessary changes.
+
+Solve as many as possible ( No Pressure !!!)
+ 1. Add a new product
+i/p - product details (except id)
+o/p - message (success or failure)
+
+ 2. Display product details 
+     i/p - product id 
+o/p - product details OR error message
+
+ 3. Display   id , name , price  of all the products manufactured before specified date and from specific category
+i/p - date , category(enum)
+o/p - List of selected products details
+
+ 4. Change Product price
+   i/p - product name
+   o/p - message
+
+OPTIONAL
+
+ 5. Apply discount to all products , whose available quantity > specified quantity
+i/p - quantity n discount in %
+o/p - message
+
+
+Day 11
+Download , extract & save today's data in study material
+
+Windows Users (using supplied STS4)
+To Use Lombok annotations to reduce boilerplate code from Java classes (typically POJOs)
+
+ Edit SpringToolSuite4.ini
+
+"sts-4.30.0.RELEASE\SpringToolSuite4.ini"
+Edit last line
+#-javaagent:E:\sts-4.30.0.RELEASE\lombok.jar
+-javaagent:.\lombok.jar
+
+For Mac users 
+Refer to uploaded -"\Step-by-Step Install Lombok for STS.txt"
+(Credit - ChatGPT)
+
+1. In combined lab
+- import day11.2 , in your workspace , as existing Maven project
+- edit DB password
+- Force update .
+(NOTE - If Lombok doesn't work , replace the annotations by actual constructors , getters ,setters , toString)
+
+2. Run TestHibernate
+
+3. Open mysql cmd line console
+
+4. use healthcare_2
+- You should see this 
+Tables_in_healthcare_2 |
++------------------------+
+| appointments           |
+| diagnostic_tests       |
+| doctors                |
+| patient_tests          |
+| patients               |
+| users   
+
+5. Copy "day11_data\day11_help\case study\healthcare sql.txt"
+Paste it under  
+healthcare_2
+You will have tables with sample data.
+
+
+6. Revise mapping annotations completely.
+
+
+Optional work - 
+Solve objectives
+1.	Register Patient | Doctor
+ 
+2.	Login Patient | Doctor
+ - common login with email , password 
+ - check the role & as per the role fetch complete details (doctor | patient dashboard)
+
+3.  View Upcoming appointments
+
+4. Book Appointment
+
+5. Cancel Appointment
+
+
+
+In the individual labs
+-import & revise day11.1
+- Blob Handling
+
+OPTIONAL !!!!!!!!!!!!!!
+EMS
+
+Department 1<------* Employee
+
+Employee 1------>1  Address
+
+Employee *<------*  Project
+
+
+Day 12
+1. In combined lab
+- import day12.1 , in your workspace , as existing Maven project
+- edit DB password
+- Force update .
+(NOTE - If Lombok doesn't work , replace the annotations by actual constructors , getters ,setters , toString)
+
+2.  Solve 
+Doctor registration (with cascading)
+i/p - complete doctor details
+o/p - message (success | failure)
+
+
+3. - import web_mvc_hibernate_template , in your workspace , as existing Maven project.
+- It is the integration of hibernate in web application.
+- edit DB password (from hibernate.cfg.xml)
+- Force update .
+(NOTE - If Lombok doesn't work , replace the annotations by actual constructors , getters ,setters , toString)
+
+3.1 Understand given code
+- web.xml
+- context listener (HibernateSFManager)
+- HibernateUtils
+- FrontController (servlet)
+- UserLoginServlet
+- DAO layer & entities
+
+3.2 Complete login -> logout flow
+
+
+4. import test_spring_core , in your workspace , as existing Maven project
+-Force Update
+- It will download spring dependencies (JARs)
+- Check Maven Dependencies folder.
+- check spring bean configuration file from <resources>
+- Launch Spring Container , to check if spring is up & running
+
+5. In the individual labs -
+- continue with day12.1
+Complete these tasks 
+3.  View Upcoming appointments for patient | doctor
+i/p - patient id | doctor id
+o/p - list
+
+4. Book Appointment
+i/p - doctor id , patient id , appointment TS
+o/p - message
+
+4.1 Check if doctor is available 
+More practical approach
+Assume - appointment time slot=30 min
+Then generate the logic
+
+4.2 If available , book appointment.
+
+5. Cancel Appointment (lab work)
+i/p - appointment id , patient id (only for extra validation)
+o/p - message
+
+
+
+Day 13
+
+1. import day13.1 
+- edit DB password
+- hibernate standalone (main based)
+- Refer to BookAppointment.java
+ - Test the code.
+
+2.  import day13.2
+-Simple standalone(main based) Spring Project to understand Spring Bean Life cycle & Constructor based D.I 
+
+3.  import day13.3
+-Simple standalone(main based) Spring Project to understand  Setter based D.I
+
+ 4.  import day13.4
+-Simple standalone(main based) Spring Project to understand  Factory method based D.I
+
+5.  import day13.5
+-Simple standalone(main based) Spring Project to understand  auto wiring by name
+
+6.  import day13.6
+-Simple standalone(main based) Spring Project to understand  auto wiring by type
+
+----------------------PENDING---------------------
+
+7.  import day13.7
+-Simple standalone(main based) Spring Project to understand  auto wiring by constructor
+
+8.  import day13.8
+-Simple standalone(main based) Spring Project to understand  hybrid approach (lesser xml tags & majority annotations)
+
+
+Pending Hibernate topics
+- bi dir association
+JPA value types 
+
+
+
+
+
+
+

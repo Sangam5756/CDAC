@@ -1,0 +1,7 @@
+com\sunbeam\pages\FrontControllerServlet.class
+com\sunbeam\pojos\User.class
+com\sunbeam\pojos\UserRole.class
+com\sunbeam\dao\UserDao.class
+com\sunbeam\dao\UserDaoImpl.class
+com\sunbeam\listeners\HibernateSFManager.class
+com\sunbeam\utils\HibernateUtils.class
