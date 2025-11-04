@@ -14,5 +14,7 @@ public interface RestaurantsRepository extends CrudRepository<Restaurant, Long> 
 
 //	to add the object we need to store then direct object
 	boolean existsByName(String restaurantName);
+	
+	
 
 }

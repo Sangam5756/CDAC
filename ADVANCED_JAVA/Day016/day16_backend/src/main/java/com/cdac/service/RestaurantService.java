@@ -7,8 +7,10 @@ import com.cdac.entities.Restaurant;
 public interface RestaurantService {
 
 //	to get all restaurent
-	public List<Restaurant> getAllRestaurents();
+	public List<Restaurant> getAllRestaurents(Boolean status);
 
-	public String addRestaurent(Restaurant newRestaturent);
+	public Restaurant addRestaurent(Restaurant newRestaturent);
+
 //	delete the 
+	public String deleteById(Long restaurantId);
 }
