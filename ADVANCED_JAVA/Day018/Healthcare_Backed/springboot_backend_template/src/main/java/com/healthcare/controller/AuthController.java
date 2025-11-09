@@ -13,10 +13,12 @@ import com.healthcare.dto.AuthResponse;
 import com.healthcare.service.UserService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor
+@Slf4j
 public class AuthController {
 
 	private final UserService userService;
