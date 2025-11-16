@@ -7,5 +7,5 @@ import com.inventory.entities.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
+  
 }
