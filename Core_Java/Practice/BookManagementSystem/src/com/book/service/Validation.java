@@ -12,7 +12,7 @@ public class Validation {
 	public static void validateRating(int rating) throws BooksException {
 		if (rating < 0 || rating > 5)
 		    throw new BooksException("invalid rating exception");
-
+	}
 	public static void validateTitle(String title) throws BooksException {
 		if (title.length() < 3 && title.length() > 50)
 			throw new BooksException("title length must be 1 to 50");
@@ -36,6 +36,7 @@ public class Validation {
 
 	}
 	
+
 	public static Book validateEbook(String title, String author, int rating, double price, boolean availableStock, String genre,
 			double filesize, String format) throws BooksException {
 
