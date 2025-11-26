@@ -96,8 +96,9 @@ public class Ass3CircularQueue {
         queue.dequeue();
         queue.dequeue();
         queue.dequeue();
-        queue.dequeue();
-        queue.dequeue();
+        queue.enqueue(6);
+        queue.enqueue(7);
+
 
         queue.display();
         System.out.println("checking queu  isEmpty or not ------ " + queue.isEmpty());
