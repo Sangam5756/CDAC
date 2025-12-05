@@ -32,13 +32,16 @@ class MovieController {
     }
 
     updateMovie(req, res) {
-        const { id, name, price, date } = req.body;
+        let { id, name, price, date } = req.body;
         const updateQuery = 'update movie set name=?,price=?,date=? where id=?';
-
-        db.query(updateQuery, [name, price, date, id], (err, result) => {
+            date = date.slice(0,10);
+            console.log(date);
+        db.query(updateQuery, [name, price,date, id], (err, result) => {
             if (err) {
+                console.log(err)
                 res.json({ message: "Error updating movie" });
             } else {
+                console.log(result)
                 res.json({ message: "Movie updated successfully" });
             }
         })
