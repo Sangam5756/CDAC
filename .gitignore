@@ -3,3 +3,9 @@ state
 .metadata
 .settings
 *.class
+
+
+.fake
+*Obj
+
+*bin
