@@ -1,0 +1,53 @@
+﻿@model MVC.Models.Emp;
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Employee System</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+   
+</head>
+<body class="container">
+
+    <div class="table-container">
+        <h2 class="text-center mb-4 text-primary fw-bold">Employee Records</h2>
+
+        <div class="table-responsive">
+           <form method="post" action="/home/afterUpdate">
+                <table class="table table-bordered table-hover align-middle">
+                    <tbody>
+                        <tr>
+                            <td><input type="text" hidden  name="Id" value=@Model.Id></td>
+                        </tr>
+
+                        <tr>
+
+                            <td>Name</td>
+
+                            <td><input type="text" name="name" value=@Model.Name /></td>
+                        </tr>
+                        <tr>
+
+                            <td>Addres</td>
+
+                            <td><input type="text" name="Address" value="@Model.Address"/></td>
+                        </tr>
+
+                        <tr>
+
+                           
+
+                            <td><input type="submit" class="btn btn-outline-success" /></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+           </form>
+        </div>
+    </div>
+
+</body>
+</html>
