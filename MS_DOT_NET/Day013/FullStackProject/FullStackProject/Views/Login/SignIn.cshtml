@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+<  class="table-container">
+
+    <h2 class="text-center mb-4 text-primary fw-bold"> Login</h2>
+
+    <div class="table-responsive">
+        <form action="/Login/SignIn">
+            <table class="table table-bordered table-hover align-middle">
+                <tbody>
+
+                    <tr>
+
+                        <td>UserName</td>
+
+                        <td><input type="text" name="UserName" value="" placeholder="Enter the Username"/></td>
+                        <td style="color:red">@Html.ValidationMessage("UserName")</td>
+                    </tr>
+                    <tr>
+
+                        <td>Password</td>
+
+                        <td><input type="text" name="Password" value="" placeholder="Enter the Password"/>
+                            </td>
+                        <td style="color:red">@Html.ValidationMessage("Password")</td>
+
+                    
+                    </tr>
+
+                    <tr>
+                          <td colspan="3">
+                              <center>
+
+                              <input type="submit" value="SignIn" class="btn btn-outline-success" />
+                            </center>
+
+                          </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </form>
+        <p class="alert-danger">
+            @ViewBag.Message    
+        </p>
+    </div>

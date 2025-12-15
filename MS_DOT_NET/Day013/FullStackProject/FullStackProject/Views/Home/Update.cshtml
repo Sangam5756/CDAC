@@ -1,0 +1,65 @@
+﻿@model FullStackProject.Models.Student;
+@{
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+<div class="table-container">
+    <h2 class="text-center mb-4 text-primary fw-bold">Employee Records</h2>
+
+    <div class="table-responsive">
+        <form action="/home/afterUpdate" method="post">
+            <table class="table table-bordered table-hover align-middle">
+                <tbody>
+
+
+                    <tr>
+
+                        <td><input type="hidden"  name="No" value=@Model.No></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Name</td>
+
+                        <td><input type="text" name="Name" value=@Model.Name ></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Email</td>
+
+                        <td><input type="text" name="email" value=@Model.Email></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Address</td>
+
+                        <td><input type="text" name="Address" value=@Model.Address ></td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>Age</td>
+
+                        <td><input type="number" name="Age" value=@Model.Age ></td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td><<input type="submit" class="btn btn-outline-success" /></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </form>
+        <p style="color:red"> @ViewBag.Message</p>
+    </div>
+</div>

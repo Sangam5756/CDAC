@@ -1,0 +1,64 @@
+﻿@model List<FullStackProject.Models.Student>
+@{
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+
+<div style="float-right">
+        <a href="/Login/SignOut" class="btn btn-primary"> Sign Out</a>
+</div>
+
+
+
+<div class="table-container">
+    <h2 class="text-center mb-4 text-primary fw-bold">Students Records</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+        <a href="/home/create" class="btn btn-primary px-4">+ Add New Record</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="text-center">
+                <tr>
+                    <th>NO</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>IsValid</th>
+                    <th>Age</th>
+
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody class="text-center">
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <td>@emp.No</td>
+                        <td>@emp.Name</td>
+                        <td>@emp.Address</td>
+                        <td>@emp.Email</td>
+                        <td>@emp.IsEmailValidated</td>
+                        <td>@emp.Age</td>
+
+                        <td>
+                            <a href="/Home/Update/@emp.No" class="btn btn-sm btn-primary">
+                                Edit
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/Home/Delete/@emp.No" class="btn btn-sm btn-danger">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

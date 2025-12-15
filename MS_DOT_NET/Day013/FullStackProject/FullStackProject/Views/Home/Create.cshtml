@@ -1,0 +1,65 @@
+﻿  @{
+    Layout = "~/Views/Shared/Master.cshtml";
+}
+
+<div class="table-container">
+    <h2 class="text-center mb-4 text-primary fw-bold">Employee Records</h2>
+
+    <div class="table-responsive">
+        <form action="/home/aftercreate">
+            <table class="table table-bordered table-hover align-middle">
+                <tbody>
+
+                    <tr>
+
+                        <td>Name</td>
+
+                        <td><input type="text" name="Name" value="" /></td>
+                        <td style="color:red">@Html.ValidationMessage("Name")</td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Email</td>
+
+                        <td><input type="text" name="email" value="" /></td>
+                        <td style="color:red">@Html.ValidationMessage("Email")</td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Address</td>
+
+                        <td><input type="text" name="Address" value="" /></td>
+                        <td style="color:red">@Html.ValidationMessage("Address")</td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>Age</td>
+
+                        <td><input type="number" name="Age" value="" /></td>
+                        <td style="color:red">@Html.ValidationMessage("Age")</td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+
+
+
+                        <td><<input type="submit" class="btn btn-outline-success" /></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </form>
+        <p style="color:red"> @ViewBag.Message</p>
+    </div>
+</div>
