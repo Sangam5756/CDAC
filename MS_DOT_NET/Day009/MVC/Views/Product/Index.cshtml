@@ -1,0 +1,83 @@
+﻿@model List<MVC.Models.Product>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Product System</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <style>
+        body {
+            background-color: #f6f7fb;
+        }
+
+        .table-container {
+            margin-top: 60px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+        }
+
+        th {
+            background-color: #0d6efd !important;
+            color: #fff;
+        }
+
+        table tbody tr:hover {
+            background-color: #f0f4ff;
+            transition: background 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="container">
+
+    <div class="table-container">
+        <h2 class="text-center mb-4 text-primary fw-bold">Product Records</h2>
+
+        <div class="d-flex justify-content-end mb-3">
+            <a href="/Product/create" class="btn btn-success px-4">+ Add Product</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="text-center">
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-center">
+                    @foreach (var emp in Model)
+                    {
+                        <tr>
+                            <td>@emp.Id</td>
+                            <td>@emp.title</td>
+                            <td>@emp.description</td>
+                            <td>@emp.cost</td>
+                            <td>
+                                <a href="/product/Update/@emp.Id" class="btn btn-sm btn-primary">
+                                    Edit
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/Product/Delete/@emp.Id" class="btn btn-sm btn-danger">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

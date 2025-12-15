@@ -1,11 +1,12 @@
-﻿
+﻿@model MVC.Models.Product;
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Employee System</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-  
+
+   
 </head>
 <body class="container">
 
@@ -13,28 +14,38 @@
         <h2 class="text-center mb-4 text-primary fw-bold">Employee Records</h2>
 
         <div class="table-responsive">
-           <form action="/home/aftercreate">
+           <form method="post" action="/product/AfterUpdate">
                 <table class="table table-bordered table-hover align-middle">
                     <tbody>
+                        <tr>
+                            <td><input type="text" hidden  name="Id" value=@Model.Id></td>
+                        </tr>
 
                         <tr>
 
-                            <td>Name</td>
+                            <td>Title</td>
 
-                            <td><input type="type" name="name" value="" /></td>
+                            <td><input type="text" name="title" value=@Model.title /></td>
                         </tr>
                         <tr>
 
-                            <td>Addres</td>
+                            <td>Description</td>
 
-                            <td><input type="type" name="Address" value="" /></td>
+                            <td><input type="text" name="description" value="@Model.description" /></td>
+                        </tr>
+
+                        <tr>
+
+                            <td>Cost</td>
+
+                            <td><input type="number" name="cost" value="@Model.cost" /></td>
                         </tr>
 
                         <tr>
 
                            
 
-                            <td><<input type="submit" class="btn btn-outline-success" /></td>
+                            <td><input type="submit" class="btn btn-outline-success" /></td>
                         </tr>
 
                     </tbody>
