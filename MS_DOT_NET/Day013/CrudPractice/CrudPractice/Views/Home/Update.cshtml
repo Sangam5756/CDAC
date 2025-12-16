@@ -1,0 +1,23 @@
+﻿@model CrudPractice.Models.Movie;
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title>Update</title></head>
+    <body>
+
+
+
+        <form action="/Home/AfterUpdate" method="post">
+        <input type="hidden" name="Id" value=@Model.Id />
+
+        <input type="text" name="Name" value=@Model.Name  />
+
+        <input type="number" name="Price" value=@Model.Price />
+        
+        <input type="datetime" name="Date" value=@Model.Date  />
+
+        <input type="submit" value="Update"/>
+
+        </form>
+
+
+    </body>
+</html>

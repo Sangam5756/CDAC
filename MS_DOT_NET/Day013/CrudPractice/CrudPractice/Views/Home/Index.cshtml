@@ -1,0 +1,41 @@
+﻿@model List<CrudPractice.Models.Movie>;
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head> <title>
+        Home
+
+    </title>
+    
+</head>
+    <body>
+
+        <p> Home </p>
+    <td> <a href="/Home/Create">Create</a></td>
+
+        <table>
+    <tr>
+        <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Update</th>
+    </tr>
+    <tbody>
+            @foreach (var movie in Model)
+            {
+                <tr>
+                    <td> @movie.Id</td>
+                    <td> @movie.Name</td>
+                    <td> @movie.Price</td>
+                    <td> @movie.Date</td>
+                    <td> <a href="/Home/Update/@movie.Id">Update</a></td>
+                    <td> <a href="/Home/Delete/@movie.Id">Delete</a></td>
+
+                </tr>
+            }
+        </tbody>
+</table>
+
+    </body>
+</html>
