@@ -13,7 +13,7 @@ public class BookAppointment {
 			AppointmentDao appointment = new AppointmentDaoImpl();
 
 			System.out.println("Enter the Data DoctorId PatientId appointmentDate");
-
+ 
 			System.out.println(appointment.BookAppointMent(sc.nextInt(), sc.nextInt(), sc.next()));
 
 			appointment.cleanup();
