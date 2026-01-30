@@ -71,7 +71,6 @@ public class Customer {
 
 	public boolean equals(Object obj) {
 		if (obj instanceof Customer) {
-
 			return this.email == ((Customer) obj).email;
 		}
 		return false;

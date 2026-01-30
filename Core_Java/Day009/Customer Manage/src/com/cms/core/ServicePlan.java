@@ -6,7 +6,5 @@ public enum ServicePlan {
 	DIAMOND(5000),
 	PLATINUM(10000);
 
-	ServicePlan(int i) {
-		// TODO Auto-generated constructor stub
-	}	
+	ServicePlan(int i) {}	
 }

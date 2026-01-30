@@ -14,6 +14,29 @@ public class LinkedList {
     Node head;
 
 
+
+    public Node  reverse(){
+
+             if (head == null || head.next == null) {
+        return head;
+    }
+
+
+            Node prev=null;
+            Node curr = head;
+            while(curr!=null){
+                Node next=curr.next;
+                curr.next=prev;
+                prev=curr;
+                curr=next;
+                
+
+            }
+                return prev;
+
+    }
+
+
     
     public  Node  reverseLinkedList(Node head){
 
@@ -48,7 +71,7 @@ public class LinkedList {
 
     }
 
-    public void addAtTail(int data){
+public void addAtTail(int data){
         Node newNode = new Node(data);
 
         if(head == null)
@@ -92,9 +115,6 @@ public void addAtIndex(int data,int index){
         temp.next=newNode;
     }
 
-
-     
-
 public void deleteAtHead(){
         if(head == null)
         {
@@ -110,7 +130,7 @@ public void deleteAtHead(){
 
     }
 
-    public void display(Node head) {
+public void display(Node head) {
         Node temp = head;
 
         while (temp != null) {
@@ -120,8 +140,7 @@ public void deleteAtHead(){
         System.out.println("null");
     }
 
-
-    public void deleteAtIndex(int index){
+public void deleteAtIndex(int index){
         // if head is null
 
             if(head == null)
@@ -151,7 +170,7 @@ public void deleteAtHead(){
 
     }
 
-    public void deleteAtEnd(){
+public void deleteAtEnd(){
         if(head == null)
         {   
             System.out.println("Head is Null");
@@ -182,11 +201,12 @@ public void deleteAtHead(){
         list.addAtTail(4);
         list.addAtTail(5);
         list.addAtTail(6);
-        list.addAtIndex(7,5);
+        // list.addAtIndex(7,5);
         list.display(list.head);
-list.deleteAtIndex(5);
+// list.deleteAtIndex(5);
         // list.deleteAtEnd();
-        list.display(list.head);
+    
+        list.display(    list.reverse());
 
 
 
